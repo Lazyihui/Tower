@@ -10,6 +10,8 @@
         "monsterentity.h": "c",
         "bulletentity.h": "c",
         "stdio.h": "c",
-        "inputentity.h": "c"
+        "inputentity.h": "c",
+        "cameracontroller.h": "c",
+        "uicontroller.h": "c"
     }
 }

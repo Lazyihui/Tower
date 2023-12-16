@@ -2,58 +2,56 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 #include "Context.h"
-#include "CameraController.h"
 #include "Common.h"
-// int main() {
-//     Context ctx = {0};
-//     ContextInti(&ctx);
-//     InitWindow(ctx.windowWidth, ctx.windowHeight, "Tower");
-//     ctx.camera.zoom = 2;
+#include "UIController.h"
+#include "MonsterEntity.h"
+#include "MonsterController.h"
+#include "TowerEntity.h"
+#include "TowerController.h"
 
-//     while (!WindowShouldClose()) {
-//         float dt = GetFrameTime();
-//         BeginDrawing();
-//         ClearBackground(BLACK);
-//         DrawCircle(0, 0, 50, BLUE);
+void Draw_AllWorld(Context* ctx) {
+    // 路
+    DrawRectangle(-50, -200, 100, 400, BROWN);
+    // tower
+    for (int i = 0; i < ctx->towerCount; i++) {
+        TowerEntity* UITower = &ctx->towers[i];
 
-//         // Camera2D_Follow(ctx.targetPos, ctx.camera, 400, 200);
-//         ctx.camera.offset.x = 400;
-//         ctx.camera.offset.y = 200;
-//         ctx.camera.target = ctx.targetPos;
-//         DrawCircleV(ctx.targetPos, 100, RED);
+        Draw_UItower(UITower);
+    }
+}
 
-//         BeginMode2D(ctx.camera);
-
-//         EndMode2D();
-//         EndDrawing();
-//     }
-//     CloseWindow();
-//     return 0;
-// }
+// offset+target
 
 int main() {
     InitWindow(800, 400, "Tower");
     Context ctx = {0};
     ContextInit(&ctx);
+
     while (!WindowShouldClose()) {
 
         float dt = GetFrameTime();
         BeginDrawing();
+        // 世界 在中心
         BeginMode2D(ctx.camera.camera);
-        ClearBackground(WHITE);
+        ClearBackground(RAYWHITE);
+        
         // CameraEntity_Follow();
 
-        DrawRectangle(ctx.buttonRect.x, ctx.buttonRect.y, ctx.buttonRectsize.x, ctx.buttonRectsize.y, BLACK);
-        DrawText("please press to start game", ctx.buttonRect.x - 1, ctx.buttonRect.y, 10, WHITE);
-        Vector2 mousePos = GetMousePosition();
-        bool isInisde = IsRectInsideMouse(ctx.buttonRect, ctx.buttonRectsize.x, ctx.buttonRectsize.y, mousePos);
-        if (IsMouseButtonPressed(0) && isInisde) {
-            ctx.gameStatus = 1;
+        if (ctx.gameStatus == 0) {
+
+        } else if (ctx.gameStatus == 1) {
+            Draw_AllWorld(&ctx);
+            MonsterEntitySpawn_Tick(&ctx, dt);
         }
 
-
-
         EndMode2D();
+        // UI屏幕 00 在左上角
+        if (ctx.gameStatus == 0) {
+            UIController_Tick(&ctx);
+
+        } else if (ctx.gameStatus == 1) {
+            UIController_WorldTick(&ctx, dt);
+        }
         EndDrawing();
     }
     CloseWindow();

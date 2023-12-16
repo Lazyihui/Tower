@@ -11,23 +11,20 @@ Vector2 Vector2_New(float x, float y) {
     return a;
 }
 
-bool IsCirlceInsideMouse(Vector2 dipos, float diradius, Vector2 mouse) {
-    int a = diradius * diradius;
-    int b = (mouse.x - dipos.x) * (mouse.x - dipos.x) + (mouse.y - dipos.y) * (mouse.y - dipos.y);
-    if (b >= a) {
-        return false;
-    } else {
+bool IsRectInsideMouse(Vector2 rectPos, int width, int height, Vector2 mousePos) {
+    if (mousePos.x >= rectPos.x && mousePos.x <= rectPos.x + width && mousePos.y >= rectPos.y &&
+        mousePos.y <= rectPos.y + height) {
         return true;
+    } else {
+
+        return false;
     }
 }
 
-bool IsRectInsideMouse(Vector2 rectPos, int width, int height, Vector2 mousePos) {
-    if (mousePos.x > rectPos.x && mousePos.x < rectPos.x + width && mousePos.y > rectPos.y &&
-        mousePos.y < rectPos.y + height) {
-        return true;
-    } else {
-        return false;
-    }
+void Text_Int(int b, int x, int y, int size, Color color) {
+    const char* a = TextFormat("%d", b);
+    DrawText(a, x, y, size, color);
 }
+
 
 #endif
