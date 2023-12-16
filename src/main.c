@@ -22,6 +22,13 @@ void Draw_AllWorld(Context* ctx) {
     for (int i = 0; i < ctx->towerCount; i++) {
         Draw_UItower(&ctx->towers[i]);
     }
+    for (int i = 0; i < ctx->mstCount; i++) {
+        MonsterEntity* mst = ctx->mstarr[i];
+        if (mst->isLive) {
+
+            Draw_MonsterEntity(mst);
+        }
+    }
 }
 
 // offset+target

@@ -21,6 +21,7 @@ MonsterEntity* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, 
     mst->pos = pos;
     mst->radius = radius;
     mst->speed = speed;
+    
     return mst;
 }
 

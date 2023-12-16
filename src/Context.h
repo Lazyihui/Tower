@@ -24,7 +24,7 @@ typedef struct Context {
     float goldTimer;
     float hp;
 
-    MonsterEntity mstarr[100];
+    MonsterEntity *mstarr[100];
     int mstCount;
     float mstSpawnTimer;
     float mstSpawnInterval;
@@ -54,7 +54,7 @@ void ContextInit(Context* ctx) {
     ctx->hp = 100;
 
     // monster
-    ctx->mstCount = 1;
+    ctx->mstCount = 0;
     ctx->mstSpawnTimer = 2;
     ctx->mstSpawnInterval = 2;
 

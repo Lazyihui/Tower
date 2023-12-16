@@ -35,4 +35,12 @@ void Text_Int(int b, int x, int y, int size, Color color) {
     DrawText(a, x, y, size, color);
 }
 
+const char* Vector2Text(Vector2 pos) {
+    return TextFormat("x=%f y=%f\r\n", pos.x, pos.y);
+}
+
+const char* ColorText(Color color) {
+    return TextFormat("r=%d g=%d b=%d a=%d\r\n", color.r, color.g, color.b, color.a);
+}
+
 #endif
