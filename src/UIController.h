@@ -3,18 +3,15 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 #include "Context.h"
-#include "TowerEntity.h"
+#include "CellEntity.h"
+#include "InputEntity.h"
+#include "GUIButton.h"
 
-void UIController_Tick(Context* ctx) {
-    DrawRectangle(ctx->buttonRect.x, ctx->buttonRect.y, ctx->buttonRectsize.x, ctx->buttonRectsize.y, BLACK);
-    DrawText("please press to start game", ctx->buttonRect.x + 1, ctx->buttonRect.y, 20, WHITE);
-    Vector2 mousePos = GetMousePosition();
-    bool isInisde = IsRectInsideMouse(ctx->buttonRect, ctx->buttonRectsize.x, ctx->buttonRectsize.y, mousePos);
-    if (IsMouseButtonPressed(0) && isInisde) {
-        ctx->gameStatus = 1;
-    }
+void UIController_LoginDraw(Context* ctx) {
+     GUIButton_Draw(&ctx->btnStartGame);
 }
-void UIController_WorldTick(Context* ctx, float dt) {
+
+void UIController_WorldDraw(Context* ctx, float dt) {
     // 时间
     ctx->time += dt;
     DrawText("time", 20, 15, 20, BLACK);

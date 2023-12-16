@@ -3,16 +3,17 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
-typedef struct TowerEntity {
+typedef struct CellEntity {
     float width;
     float height;
     Vector2 pos;
-    float interval;    
     Color color;
-} TowerEntity;
+} CellEntity;
+
+
 
 // 画格子（塔）
-void Draw_UItower(TowerEntity *tower) {
+void Draw_UItower(CellEntity *tower) {
     DrawRectangle(tower->pos.x,tower->pos.y,tower->width,tower->width,tower->color);
 }
 

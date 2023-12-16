@@ -1,9 +1,12 @@
 #ifndef CONTEXT_H__
 #define CONTEXT_H__
 #include "../include/raylib.h"
+#include "Factory.h"
 #include "CameraEntity.h"
 #include "MonsterEntity.h"
-#include "TowerEntity.h"
+#include "CellEntity.h"
+#include "InputEntity.h"
+#include "GUIButton.h"
 
 typedef struct Context {
     CameraEntity camera;
@@ -13,8 +16,7 @@ typedef struct Context {
     int windowHeight;
     int gameStatus;
 
-    Vector2 buttonRect;
-    Vector2 buttonRectsize;
+    GUIButton btnStartGame;
 
     float time;
     float gold;
@@ -27,10 +29,12 @@ typedef struct Context {
     float mstSpawnTimer;
     float mstSpawnInterval;
 
-    TowerEntity towers[10];
+    CellEntity towers[10];
     int towerCount;
     Vector2 TwStartPos;
     int interval;
+
+    InputEntity input;
 } Context;
 
 void ContextInit(Context* ctx) {
@@ -41,11 +45,6 @@ void ContextInit(Context* ctx) {
     ctx->windowHeight = 400;
     ctx->targetPos.x = 0;
     ctx->targetPos.y = 0;
-
-    ctx->buttonRect.x = 300;
-    ctx->buttonRect.y = 170;
-    ctx->buttonRectsize.x = 300;
-    ctx->buttonRectsize.y = 20;
 
     ctx->gameStatus = 0;
     ctx->time = 0;
@@ -62,9 +61,23 @@ void ContextInit(Context* ctx) {
     ctx->towerCount = 0;
     ctx->TwStartPos.x = -90;
     ctx->TwStartPos.y = 160;
+
+    GUIButton *btn=&ctx->btnStartGame;
+    btn->bgColor=BLACK;
+    btn->bgHoverColor=GRAY;
+    btn->rect.x=300;
+    btn->rect.y=170;
+    btn->rect.width=300;
+    btn->rect.height=20;
+    btn->text="start game";
+    btn->textColor=WHITE;
+    btn->isInside=false;
+
+    // ctx->input = Factory_CreatInput();
+    
     // for (int i = 0; i < 10; i++) {
 
-    //     TowerEntity* tower = &ctx->towers[i];
+    //     CellEntity* tower = &ctx->towers[i];
 
     //     printf("start %f\r\n", tower->interval);
 
@@ -76,31 +89,28 @@ void ContextInit(Context* ctx) {
     //     tower->interval += 30;
     //     printf("%f\r\n", tower->interval);
     // }
-    ctx->towers->color = BLUE;
-    ctx->towers->height = 20;
-    ctx->towers->width = 20;
-    ctx->towers->interval = 10;
-    ctx->towers->pos.x = 0;
-    ctx->towers->pos.y = 0;
-    ctx->towers->interval=50;
+    // ctx->towers->color = BLUE;
+    // ctx->towers->height = 20;
+    // ctx->towers->width = 20;
+    // ctx->towers->interval = 10;
+    // ctx->towers->pos.x = 0;
+    // ctx->towers->pos.y = 0;
+    // ctx->towers->interval=50;
 
-    for (int i = 0; i < 6; i++) {
-        TowerEntity tw = (TowerEntity){0};
-        //问题
-        // tw.pos.y = ctx->TwStartPos.y - i * (ctx->towers->interval+ctx->towers->height);
-        tw.pos.y = ctx->TwStartPos.y - i * 70;
-        tw.pos.x = ctx->TwStartPos.x;
-        tw.color = ctx->towers->color;
-        tw.height = ctx->towers->height;
-        tw.width = ctx->towers->width;
+    // for (int i = 0; i < 6; i++) {
+    //     CellEntity tw = (CellEntity){0};
 
-        ctx->towers[ctx->towerCount] = tw;
-        ctx->towerCount++;
+    //     tw.pos.y = ctx->TwStartPos.y - i * 70;
+    //     tw.pos.x = ctx->TwStartPos.x;
+    //     tw.color = BLUE;
+    //     tw.height = 20;
+    //     tw.width = 20;
+    //     ctx->towers[ctx->towerCount] = tw;
+    //     ctx->towerCount++;
 
-        printf("y=%f\r\n", tw.pos.y);
-        printf("count =%d", ctx->towerCount);
-
-    }
+    //     printf("y=%f\r\n", tw.pos.y);
+    //     printf("count =%d", ctx->towerCount);
+    // }
 }
 
 #endif

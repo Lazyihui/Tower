@@ -4,20 +4,13 @@
 #include "MonsterEntity.h"
 
 void MonsterEntitySpawn_Tick(Context* ctx, float dt) {
-    //注意
+    // 注意
     ctx->mstSpawnTimer -= dt;
     if (ctx->mstSpawnTimer <= 0) {
-        //次数
+        // 次数
         for (int i = 0; i < 1; i++) {
-            MonsterEntity* mst = &ctx->mstarr[ctx->mstCount];
-            mst->isLive = true;
-            mst->color = RED;
-            mst->moveAxis.x = 0;
-            mst->moveAxis.y = -1;
-            mst->pos.x = 0;
-            mst->pos.y = 210;
-            mst->radius = 5;
-            mst->speed = 50;
+            MonsterEntity* mst = Factory_CreateMonster(RED, Vector2_New(0, -1), Vector2_New(0, 210), 5, 50);
+            ctx->mstarr[ctx->mstCount] = mst;
             ctx->mstCount += 1;
         }
         ctx->mstSpawnTimer = ctx->mstSpawnInterval;

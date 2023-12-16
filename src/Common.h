@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "../include/raylib.h"
 #include "../include/raymath.h"
+const int cellsize = 70;
 
 Vector2 Vector2_New(float x, float y) {
     Vector2 a;
@@ -21,10 +22,17 @@ bool IsRectInsideMouse(Vector2 rectPos, int width, int height, Vector2 mousePos)
     }
 }
 
+bool IsRectInsideMouseRec(Rectangle rect, Vector2 mousePos) {
+    if (mousePos.x >= rect.x && mousePos.x <= rect.x + rect.width && mousePos.y >= rect.y &&
+        mousePos.y <= rect.y + rect.height) {
+        return true;
+    } else {
+        return false;
+    }
+}
 void Text_Int(int b, int x, int y, int size, Color color) {
     const char* a = TextFormat("%d", b);
     DrawText(a, x, y, size, color);
 }
-
 
 #endif
