@@ -13,7 +13,6 @@ void MonsterEntitySpawn_Tick(Context* ctx, float dt) {
             MonsterEntity* mst = Factory_CreateMonster(RED, Vector2_New(0, -1), Vector2_New(0, 210), 5, 50);
             ctx->mstarr[ctx->mstCount] = mst;
             ctx->mstCount += 1;
-            printf(ColorText(mst->color));
         }
         ctx->mstSpawnTimer = ctx->mstSpawnInterval;
     }

@@ -12,6 +12,8 @@
         "stdio.h": "c",
         "inputentity.h": "c",
         "cameracontroller.h": "c",
-        "uicontroller.h": "c"
+        "uicontroller.h": "c",
+        "cellentity.h": "c",
+        "factory.h": "c"
     }
 }

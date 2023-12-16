@@ -21,8 +21,19 @@ MonsterEntity* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, 
     mst->pos = pos;
     mst->radius = radius;
     mst->speed = speed;
-    
     return mst;
 }
+
+CellEntity* Factory_CreateCell(Color color, Vector2 pos, Vector2 size) {
+    CellEntity* tower = (CellEntity*)malloc(sizeof(CellEntity));
+    tower->color = color;
+    tower->height = size.y;
+    tower->width = size.x;
+    tower->pos.x = pos.x;
+    tower->pos.y = pos.y ;
+    return tower;
+}
+
+
 
 #endif

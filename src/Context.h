@@ -29,7 +29,7 @@ typedef struct Context {
     float mstSpawnTimer;
     float mstSpawnInterval;
 
-    CellEntity towers[10];
+    CellEntity *towers[10];
     int towerCount;
     Vector2 TwStartPos;
     int interval;

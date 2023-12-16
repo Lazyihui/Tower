@@ -15,13 +15,10 @@ void Draw_AllWorld(Context* ctx) {
     DrawRectangle(-50, -200, 100, 400, BROWN);
     // tower
     for (int i = 0; i < ctx->towerCount; i++) {
-        CellEntity* UITower = &ctx->towers[i];
-
+        CellEntity* UITower = ctx->towers[i];
         Draw_UItower(UITower);
     }
-    for (int i = 0; i < ctx->towerCount; i++) {
-        Draw_UItower(&ctx->towers[i]);
-    }
+    // monster
     for (int i = 0; i < ctx->mstCount; i++) {
         MonsterEntity* mst = ctx->mstarr[i];
         if (mst->isLive) {
@@ -32,7 +29,6 @@ void Draw_AllWorld(Context* ctx) {
 }
 
 // offset+target
-
 int main() {
     InitWindow(800, 400, "Tower");
 

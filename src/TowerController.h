@@ -3,17 +3,20 @@
 #include "Context.h"
 #include "CellEntity.h"
 #include "Common.h"
+#include "Factory.h"
+#include "InputEntity.h"
+
 void TowerController_Init(Context* ctx) {
 
     for (int i = 0; i < 6; i++) {
-        CellEntity* tower = &ctx->towers[i];
-        tower->color = BLUE;
-        tower->height = 20;
-        tower->width = 20;
-        tower->pos.x = -90 ;
-        tower->pos.y = 180- i*cellsize;
+        CellEntity* tower = Factory_CreateCell(BLUE, Vector2_New(-90, 180 - i * cellsize), Vector2_New(20, 20));
+        //一定要找一个东西把数据存下来
+        ctx->towers[ctx->towerCount] = tower;
         ctx->towerCount++;
     }
 }
+
+void 
+
 
 #endif

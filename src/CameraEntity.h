@@ -2,6 +2,8 @@
 #define CAMERAENTITY_H__
 #include "../include/raylib.h"
 #include "Common.h"
+
+
 typedef struct CameraEntity {
     Camera2D camera;
 
@@ -23,4 +25,7 @@ void CameraEntity_Follow(CameraEntity* camera, Vector2 targetPos) {
 void CameraEntity_SetOffset(CameraEntity* cam, Vector2 offSet) {
     cam->camera.offset = offSet;
 }
+
+
+
 #endif
