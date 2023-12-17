@@ -16,6 +16,7 @@ void Draw_AllWorld(Context* ctx) {
     // 路
     DrawRectangle(-50, -200, 100, 400, BROWN);
     // tower
+
     for (int i = 0; i < ctx->towerCount; i++) {
         CellEntity* UITower = ctx->towers[i];
         Draw_TowerCell(UITower);
@@ -52,9 +53,8 @@ int main() {
         InputEntity* input = &ctx.input;
         Input_Process(input, ctx.camera.camera.offset);
 
-
         UIManifestPanel* panel = &ctx.panel;
-    
+       
 
         // CameraEntity_Follow();
         // logic
@@ -68,11 +68,13 @@ int main() {
 
             MonsterEntitySpawn_Tick(&ctx, dt);
 
-            TowerController_TowerModelSpawn(input->mouseWorldPos,&ctx);
-
             if (panel->isOpen) {
                 int typeID = UIManifestPanel_Click(panel, input->mouseWorldPos, input->isMouseDown);
+                 if (typeID != -1) {
+                    printf("%d", typeID);
+                }
             }
+            TowerControllerPanel_IsClick(&ctx);
 
             // if (panel.isOpen) {
             //     int typeID = TowerManifest_Click(&panel, input->mouseWorldPos, input->isMouseDown);
@@ -88,9 +90,9 @@ int main() {
 
         } else if (ctx.gameStatus == 1) {
 
-            Draw_AllWorld(&ctx);
-
             UIManifestPanel_Draw(panel);
+
+            Draw_AllWorld(&ctx);
         }
 
         EndMode2D();
