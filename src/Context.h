@@ -16,25 +16,27 @@ typedef struct Context {
     int windowHeight;
     int gameStatus;
 
+    // button
     GUIButton btnStartGame;
-
+    GUIButton *btnTower[3];
     float time;
     float gold;
     float goldInterval;
     float goldTimer;
     float hp;
 
-    MonsterEntity *mstarr[100];
+    MonsterEntity* mstarr[100];
     int mstCount;
     float mstSpawnTimer;
     float mstSpawnInterval;
 
-    CellEntity *towers[10];
+    CellEntity* towers[10];
     int towerCount;
     Vector2 TwStartPos;
     int interval;
 
     InputEntity input;
+
 } Context;
 
 void ContextInit(Context* ctx) {
@@ -62,19 +64,20 @@ void ContextInit(Context* ctx) {
     ctx->TwStartPos.x = -90;
     ctx->TwStartPos.y = 160;
 
-    GUIButton *btn=&ctx->btnStartGame;
-    btn->bgColor=BLACK;
-    btn->bgHoverColor=GRAY;
-    btn->rect.x=300;
-    btn->rect.y=170;
-    btn->rect.width=300;
-    btn->rect.height=20;
-    btn->text="start game";
-    btn->textColor=WHITE;
-    btn->isInside=false;
+    GUIButton* btn = &ctx->btnStartGame;
+    btn->bgColor = BLACK;
+    btn->bgHoverColor = GRAY;
+    btn->rect.x = 300;
+    btn->rect.y = 170;
+    btn->rect.width = 120;
+    btn->rect.height = 20;
+    btn->text = "start game";
+    btn->textColor = WHITE;
+    btn->isInside = false;
 
+   
     // ctx->input = Factory_CreatInput();
-    
+
     // for (int i = 0; i < 10; i++) {
 
     //     CellEntity* tower = &ctx->towers[i];

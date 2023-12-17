@@ -30,6 +30,7 @@ bool IsRectInsideMouseRec(Rectangle rect, Vector2 mousePos) {
         return false;
     }
 }
+
 void Text_Int(int b, int x, int y, int size, Color color) {
     const char* a = TextFormat("%d", b);
     DrawText(a, x, y, size, color);

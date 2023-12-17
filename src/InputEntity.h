@@ -4,14 +4,15 @@
 #include "../include/raymath.h"
 
 typedef struct InputEntity {
-    Vector2 mousePos;
+    Vector2 mousePos; // mouse screen pos
+    Vector2 mouseWorldPos;
     bool isMouseDown;
 } InputEntity;
 
-void Input_Process(InputEntity* input) {
+void Input_Process(InputEntity* input, Vector2 cameraOffset) {
     input->isMouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
     input->mousePos = GetMousePosition();
-
+    input->mouseWorldPos = Vector2Subtract(input->mousePos, cameraOffset);
 }
 
 // void Input_Process(InputEntity *input,Vector2 planePos) {

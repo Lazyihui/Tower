@@ -8,13 +8,18 @@ typedef struct CellEntity {
     float height;
     Vector2 pos;
     Color color;
+    bool isInside;
 } CellEntity;
 
 
 
 // 画格子（塔）
-void Draw_UItower(CellEntity *tower) {
+void Draw_TowerCell(CellEntity *tower) {
     DrawRectangle(tower->pos.x,tower->pos.y,tower->width,tower->width,tower->color);
+}
+
+void Draw_Tower(CellEntity* tower){
+    DrawRectangle(tower->pos.x,tower->pos.y,tower->width,tower->height,tower->color);
 }
 
 #endif

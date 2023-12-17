@@ -9,6 +9,7 @@
 #include "CellEntity.h"
 #include "TowerController.h"
 #include "InputEntity.h"
+#include "TowerManifestPanel.h"
 
 void Draw_AllWorld(Context* ctx) {
     // 路
@@ -16,7 +17,7 @@ void Draw_AllWorld(Context* ctx) {
     // tower
     for (int i = 0; i < ctx->towerCount; i++) {
         CellEntity* UITower = ctx->towers[i];
-        Draw_UItower(UITower);
+        Draw_TowerCell(UITower);
     }
     // monster
     for (int i = 0; i < ctx->mstCount; i++) {
@@ -37,16 +38,38 @@ int main() {
 
     TowerController_Init(&ctx);
 
+    PanelTowerManifest panel = {0};
+    panel.gapY = 10;
+    panel.eleCount = 0;
+    panel.eleSize = 40;
+    panel.isOpen = false;
+
+    int towerTypes[3] = {1, 2, 3};
+
     while (!WindowShouldClose()) {
 
         float dt = GetFrameTime();
         BeginDrawing();
+
         // 世界 在中心
         BeginMode2D(ctx.camera.camera);
         ClearBackground(RAYWHITE);
+
         // input
         InputEntity* input = &ctx.input;
-        Input_Process(input);
+        Input_Process(input, ctx.camera.camera.offset);
+
+        if (IsKeyPressed(KEY_B)) {
+            panel.isOpen = !panel.isOpen;
+            if (panel.isOpen) {
+                for (int i = 0; i < 3; i++) {
+                    int typeID = towerTypes[i];
+                    TowerManifest_AddElement(&panel, Vector2_New(100, -100), typeID);
+                }
+            } else {
+                TowerManifest_Close(&panel);
+            }
+        }
 
         // CameraEntity_Follow();
         // logic
@@ -59,6 +82,13 @@ int main() {
         } else if (ctx.gameStatus == 1) {
 
             MonsterEntitySpawn_Tick(&ctx, dt);
+            if (panel.isOpen) {
+                int typeID = TowerManifest_Click(&panel, input->mouseWorldPos, input->isMouseDown);
+                if (typeID != -1) {
+                    printf("%d", typeID);
+                    // Build Tower
+                }
+            }
         }
 
         // Draw
@@ -67,6 +97,7 @@ int main() {
         } else if (ctx.gameStatus == 1) {
 
             Draw_AllWorld(&ctx);
+            TowerManifest_Draw(&panel);
         }
 
         EndMode2D();

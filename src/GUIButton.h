@@ -25,17 +25,16 @@ void GUIButton_Draw(GUIButton* btn) {
 }
 
 bool GUIButton_IsMouseInside(GUIButton* btn, Vector2 mousePos) {
-
     btn->isInside = IsRectInsideMouseRec(btn->rect, mousePos);
     return btn->isInside;
-    
-    // if (isInside) {
-    //     btn->isInside = true;
-    //     return true;
-    // } else {
-    //     btn->isInside = false;
-    //     return false;
-    // }
+}
+
+bool GUIButton_IsMouseClick(GUIButton *btn, Vector2 mousePos, bool isMouseDown) {
+    if (GUIButton_IsMouseInside(btn, mousePos) && isMouseDown) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 #endif
