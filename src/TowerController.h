@@ -6,6 +6,7 @@
 #include "Factory.h"
 #include "InputEntity.h"
 #include "GUIButton.h"
+#include "UIManifest.h"
 
 void TowerController_Init(Context* ctx) {
 
@@ -15,26 +16,34 @@ void TowerController_Init(Context* ctx) {
         ctx->towers[ctx->towerCount] = tower;
         ctx->towerCount++;
     }
-
 }
 
 bool TowerController_IsMouseInside(CellEntity* tower, Vector2 mousePos) {
     tower->isInside = IsRectInsideMouse(tower->pos, tower->width, tower->height, mousePos);
+    printf("a");
     return tower;
 }
 
+void TowerController_TowerModelSpawn( Vector2 mouseWoldPos, Context* ctx) {
 
-void TowerController_TowerModelSpawn(CellEntity* towers , Vector2 mousePos,Context *ctx){
-
-    for(int i=0;i<ctx->towerCount;i++){
-        
-        CellEntity *tower = ctx->towers[i];
-        bool isInside = TowerController_IsMouseInside(tower,mousePos);
-        if(isInside){
+    for (int i = 0; i < ctx->towerCount; i++) {
+        CellEntity* tower = ctx->towers[i];
+        UIManifestPanel* panel = &ctx->panel;
+        bool isInside = TowerController_IsMouseInside(tower, mouseWoldPos);
+        if (isInside) {
+            // 等于panel->isOpen = true; and panel->isOpen=false; 并起来
+            panel->isOpen = !panel->isOpen;
+            if (panel->isOpen) {
+                for (int i = 0; i < 3; i++) {
+                    int typeID = ctx->typeTower[i];
+                    UIManifestPanel_AddElement(panel, Vector2_New(-100, -100), typeID);
+                }
+            } else {
+                UIManifest_Close(panel);
+            }
         }
     }
 }
-
 
 
 #endif

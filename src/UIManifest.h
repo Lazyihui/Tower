@@ -79,10 +79,11 @@ void UIManifestPanel_AddElement(UIManifestPanel* panel, Vector2 worldPos, int ty
     panel->eleCount++;
 }
 
-bool UIManifestPanel_Click(UIManifestPanel* panel, Vector2 mousePos, bool isMouseDown) {
+bool UIManifestPanel_Click(UIManifestPanel* panel, Vector2 mouseWorldPos, bool isMouseDown) {
     for (int i = 0; i < panel->eleCount; i++) {
         UIManifest* ele = &panel->elements[i];
-        if (UIManifest_ElementClick(ele, mousePos, isMouseDown)) {
+        if (UIManifest_ElementClick(ele, mouseWorldPos, isMouseDown)) {
+            printf("%d",ele->typeID);
             return ele->typeID;
         }
     }

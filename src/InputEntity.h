@@ -10,7 +10,7 @@ typedef struct InputEntity {
 } InputEntity;
 
 void Input_Process(InputEntity* input, Vector2 cameraOffset) {
-    input->isMouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
+    input->isMouseDown = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
     input->mousePos = GetMousePosition();
     input->mouseWorldPos = Vector2Subtract(input->mousePos, cameraOffset);
 }
