@@ -22,6 +22,7 @@ bool IsRectInsideMouse(Vector2 rectPos, int width, int height, Vector2 mousePos)
     }
 }
 
+// 矩形和鼠标的交叉检测
 bool IsRectInsideMouseRec(Rectangle rect, Vector2 mousePos) {
     if (mousePos.x >= rect.x && mousePos.x <= rect.x + rect.width && mousePos.y >= rect.y &&
         mousePos.y <= rect.y + rect.height) {

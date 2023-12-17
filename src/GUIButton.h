@@ -24,11 +24,14 @@ void GUIButton_Draw(GUIButton* btn) {
     DrawText(btn->text, btn->rect.x + 1, btn->rect.y, 20, btn->textColor);
 }
 
+
+// 鼠标是否在按钮里
 bool GUIButton_IsMouseInside(GUIButton* btn, Vector2 mousePos) {
     btn->isInside = IsRectInsideMouseRec(btn->rect, mousePos);
     return btn->isInside;
 }
 
+//按钮是否被点击
 bool GUIButton_IsMouseClick(GUIButton *btn, Vector2 mousePos, bool isMouseDown) {
     if (GUIButton_IsMouseInside(btn, mousePos) && isMouseDown) {
         return true;

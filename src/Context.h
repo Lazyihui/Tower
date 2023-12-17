@@ -7,6 +7,7 @@
 #include "CellEntity.h"
 #include "InputEntity.h"
 #include "GUIButton.h"
+#include "UIManifest.h"
 
 typedef struct Context {
     CameraEntity camera;
@@ -18,7 +19,7 @@ typedef struct Context {
 
     // button
     GUIButton btnStartGame;
-    GUIButton *btnTower[3];
+    GUIButton* btnTower[3];
     float time;
     float gold;
     float goldInterval;
@@ -36,6 +37,9 @@ typedef struct Context {
     int interval;
 
     InputEntity input;
+
+    UIManifestPanel panel;
+    int typeTower[3];
 
 } Context;
 
@@ -75,45 +79,14 @@ void ContextInit(Context* ctx) {
     btn->textColor = WHITE;
     btn->isInside = false;
 
-   
-    // ctx->input = Factory_CreatInput();
-
-    // for (int i = 0; i < 10; i++) {
-
-    //     CellEntity* tower = &ctx->towers[i];
-
-    //     printf("start %f\r\n", tower->interval);
-
-    //     tower->color = BLUE;
-    //     tower->width = 20;
-    //     tower->height = 20;
-    //     tower->pos.x = -90 + tower->interval;
-    //     tower->pos.y = 160;
-    //     tower->interval += 30;
-    //     printf("%f\r\n", tower->interval);
-    // }
-    // ctx->towers->color = BLUE;
-    // ctx->towers->height = 20;
-    // ctx->towers->width = 20;
-    // ctx->towers->interval = 10;
-    // ctx->towers->pos.x = 0;
-    // ctx->towers->pos.y = 0;
-    // ctx->towers->interval=50;
-
-    // for (int i = 0; i < 6; i++) {
-    //     CellEntity tw = (CellEntity){0};
-
-    //     tw.pos.y = ctx->TwStartPos.y - i * 70;
-    //     tw.pos.x = ctx->TwStartPos.x;
-    //     tw.color = BLUE;
-    //     tw.height = 20;
-    //     tw.width = 20;
-    //     ctx->towers[ctx->towerCount] = tw;
-    //     ctx->towerCount++;
-
-    //     printf("y=%f\r\n", tw.pos.y);
-    //     printf("count =%d", ctx->towerCount);
-    // }
+    for (int i = 0; i < 3; i++) {
+        ctx->typeTower[i] = i + 1;
+    }
+    UIManifestPanel* panel = &ctx->panel;
+    panel->eleCount = 0;
+    panel->gapY = 5;
+    panel->eleSize = 15;
+    panel->isOpen = false;
 }
 
 #endif
