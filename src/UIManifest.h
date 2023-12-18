@@ -2,6 +2,7 @@
 #define UIMANIDEST_H__
 
 #include "GUIButton.h"
+#include "CellEntity.h"
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
@@ -11,6 +12,7 @@ typedef struct UIManifest {
     int index;
     float speed;
     float hurt;
+    bool isClick;
     GUIButton btn;
 } UIManifest;
 
@@ -52,8 +54,22 @@ UIManifest UIManifest_CraeteTower(int index, int typeID, Vector2 pos, Vector2 si
     return ele;
 }
 
+// 点到会消失
 bool UIManifest_ElementClick(UIManifest* ele, Vector2 mousePos, bool isMouseDown) {
+
     return GUIButton_IsMouseClick(&ele->btn, mousePos, isMouseDown);
+}
+
+// 点到不会消失
+bool UIManifest_ElementClickNoFade(UIManifest* ele, Vector2 mouseWorldPos, bool isMouseDown) {
+
+    ele->isClick = GUIButton_IsMouseClick(&ele->btn, mouseWorldPos, IsKeyDown);
+    if (ele->isClick) {
+
+        return false;
+    } else {
+        return true;
+    }
 }
 
 void UIManifest_Draw(UIManifest* ele) {
@@ -68,6 +84,7 @@ typedef struct UIManifestPanel {
     UIManifest elements[3];
     int eleCount;
     bool isOpen;
+    bool isInside;
 } UIManifestPanel;
 
 void UIManifestPanel_AddElement(UIManifestPanel* panel, Vector2 worldPos, int typeID) {
@@ -79,23 +96,26 @@ void UIManifestPanel_AddElement(UIManifestPanel* panel, Vector2 worldPos, int ty
     panel->eleCount++;
 }
 
-
 int UIManifestPanel_Click(UIManifestPanel* panel, Vector2 mouseWorldPos, bool isMouseDown) {
+
     for (int i = 0; i < panel->eleCount; i++) {
         UIManifest* ele = &panel->elements[i];
-        if (UIManifest_ElementClick(ele, mouseWorldPos, isMouseDown)) {
+        // 点到
+        if (UIManifest_ElementClickNoFade(ele, mouseWorldPos, isMouseDown)) {
             printf("%d",ele->typeID);
-            return ele->typeID;
+            return ele->typeID; // 返回点击的是哪一个
         }
     }
     return -1;
 }
 
+// 所以都关闭
 void UIManifest_Close(UIManifestPanel* panel) {
     panel->eleCount = 0;
     panel->isOpen = false;
 }
 
+// 画
 void UIManifestPanel_Draw(UIManifestPanel* panel) {
     if (!panel->isOpen) {
         return;

@@ -14,6 +14,7 @@ typedef struct GUIButton {
     Color textColor;
 } GUIButton;
 
+
 void GUIButton_Draw(GUIButton* btn) {
 
     if (btn->isInside) {
@@ -25,6 +26,7 @@ void GUIButton_Draw(GUIButton* btn) {
 }
 
 
+
 // 鼠标是否在按钮里
 bool GUIButton_IsMouseInside(GUIButton* btn, Vector2 mousePos) {
     btn->isInside = IsRectInsideMouseRec(btn->rect, mousePos);
@@ -33,6 +35,7 @@ bool GUIButton_IsMouseInside(GUIButton* btn, Vector2 mousePos) {
 
 //按钮是否被点击
 bool GUIButton_IsMouseClick(GUIButton *btn, Vector2 mousePos, bool isMouseDown) {
+    
     if (GUIButton_IsMouseInside(btn, mousePos) && isMouseDown) {
         return true;
     } else {

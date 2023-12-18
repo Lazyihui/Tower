@@ -89,4 +89,8 @@ void ContextInit(Context* ctx) {
     panel->isOpen = false;
 }
 
+// void ContextFree(Context *ctx) {
+//     free();
+//     free(ctx);
+// }
 #endif

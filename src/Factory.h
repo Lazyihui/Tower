@@ -35,14 +35,5 @@ CellEntity* Factory_CreateCell(Color color, Vector2 pos, Vector2 size) {
     return tower;
 }
 
-// GUIButton* Factory_CreateButton(Rectangle rect, Color color) {
-//     GUIButtonTower* btn = (GUIButtonTower*)malloc(sizeof(GUIButtonTower));
-//     btn->rect.x = rect.x;
-//     btn->rect.y = rect.y;
-//     btn->rect.width = rect.width;
-//     btn->rect.height = rect.height;
-//     btn->isInside = false;
-//     btn->bgColor = color;
-// }
 
 #endif
