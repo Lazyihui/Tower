@@ -5,6 +5,7 @@
 #include "Common.h"
 
 typedef struct CellEntity {
+    int ID;
     float width;
     float height;
     Vector2 pos;
@@ -23,19 +24,19 @@ bool CellEntity_IsMouseInside(CellEntity* tower, Vector2 mousePos) {
     }
 }
 
+
+
 // 画格子（塔）
 void Draw_TowerCell(CellEntity* tower) {
     DrawRectangle(tower->pos.x, tower->pos.y, tower->width, tower->width, tower->color);
 }
 
-
-
 void Draw_Tower(CellEntity* tower, bool isElementClick) {
-    Color color ;
+    Color color;
     if (!isElementClick) {
-        color=BLUE;
+        color = BLUE;
     } else {
-        color =GRAY;
+        color = GRAY;
     }
     DrawRectangle(tower->pos.x, tower->pos.y, tower->width, tower->height, color);
 }

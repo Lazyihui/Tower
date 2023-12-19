@@ -19,7 +19,6 @@ typedef struct Context {
 
     // button
     GUIButton btnStartGame;
-    GUIButton* btnTower[3];
     float time;
     float gold;
     float goldInterval;
@@ -32,6 +31,9 @@ typedef struct Context {
     float mstSpawnInterval;
 
     CellEntity* towers[10];
+    // int towerID[10];
+    int towerIDRecord;
+    int towerClickID;
     int towerCount;
     Vector2 TwStartPos;
     int interval;
@@ -68,6 +70,13 @@ void ContextInit(Context* ctx) {
     ctx->TwStartPos.x = -90;
     ctx->TwStartPos.y = 160;
 
+    // 把数组是第几个记下来
+    ctx->towerIDRecord = 0;
+    ctx->towerClickID = -1;
+    // for (int i = 0; i < 6; i++) {
+    //     ctx->towerID[i] = i;
+    // }
+
     GUIButton* btn = &ctx->btnStartGame;
     btn->bgColor = BLACK;
     btn->bgHoverColor = GRAY;
@@ -89,8 +98,25 @@ void ContextInit(Context* ctx) {
     panel->isOpen = false;
 }
 
-// void ContextFree(Context *ctx) {
-//     free();
-//     free(ctx);
-// }
+int FindIndex_TowerByID(Context* ctx, int ID) {
+
+    for (int i = 0; i < ctx->towerCount; i++) {
+        CellEntity* tower = ctx->towers[i];
+        if (tower->ID == ID) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void ContextFree(Context* ctx) {
+    for (int i = 0; i < ctx->towerCount; i++) {
+        free(ctx->towers[i]);
+    }
+    for (int i = 0; i < ctx->mstCount; i++) {
+        free(ctx->mstarr[i]);
+    }
+    free(ctx);
+}
+
 #endif

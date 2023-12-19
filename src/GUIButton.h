@@ -19,6 +19,7 @@ void GUIButton_Draw(GUIButton* btn) {
 
     if (btn->isInside) {
         DrawRectangleRec(btn->rect, btn->bgHoverColor);
+        
     } else {
         DrawRectangleRec(btn->rect, btn->bgColor);
     }
@@ -30,7 +31,7 @@ void GUIButton_Draw(GUIButton* btn) {
 // 鼠标是否在按钮里
 bool GUIButton_IsMouseInside(GUIButton* btn, Vector2 mousePos) {
     btn->isInside = IsRectInsideMouseRec(btn->rect, mousePos);
-    return btn->isInside;
+    return  btn->isInside;
 }
 
 //按钮是否被点击

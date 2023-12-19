@@ -73,6 +73,7 @@ int main() {
                 int typeID = UIManifestPanel_Click(panel, input->mouseWorldPos, input->isMouseDown);
             }
             TowerControllerPanel_IsClick(&ctx);
+            TowerControllerEle_IsClick(&ctx);
         }
 
         // Draw
@@ -80,7 +81,7 @@ int main() {
 
         } else if (ctx.gameStatus == 1) {
 
-            UIManifestPanel_Draw(panel);
+            UIManifestPanel_Draw(panel, input->isMouseDown);
 
             Draw_AllWorld(&ctx);
         }
@@ -99,6 +100,6 @@ int main() {
         EndDrawing();
     }
     CloseWindow();
-    ContextInit(&ctx);
+    ContextFree(&ctx);
     return 0;
 }

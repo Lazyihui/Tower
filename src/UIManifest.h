@@ -42,7 +42,10 @@ UIManifest UIManifest_CraeteTower(int index, int typeID, Vector2 pos, Vector2 si
         ele.hurt = 3;
         ele.speed = 20;
         break;
-    default: color = BLACK; printf("ERR");
+    default: 
+    color = BLACK; 
+    printf("ERR");
+    break;
     }
 
     GUIButton* btn = &ele.btn;
@@ -60,20 +63,15 @@ bool UIManifest_ElementClick(UIManifest* ele, Vector2 mousePos, bool isMouseDown
     return GUIButton_IsMouseClick(&ele->btn, mousePos, isMouseDown);
 }
 
-// 点到不会消失
-bool UIManifest_ElementClickNoFade(UIManifest* ele, Vector2 mouseWorldPos, bool isMouseDown) {
+bool UIManifestEle_IsMouseInside(UIManifest* ele, Vector2 mouseWorldPos) {
 
-    ele->isClick = GUIButton_IsMouseClick(&ele->btn, mouseWorldPos, IsKeyDown);
-    if (ele->isClick) {
-
-        return false;
-    } else {
-        return true;
-    }
+    ele->isClick = IsRectInsideMouse(Vector2_New(ele->btn.rect.x, ele->btn.rect.y), ele->btn.rect.width,
+                                     ele->btn.rect.height, mouseWorldPos);
+    return ele->isClick;
 }
 
 void UIManifest_Draw(UIManifest* ele) {
-    GUIButton_Draw(&ele->btn);
+    DrawRectangle(ele->btn.rect.x, ele->btn.rect.y, ele->btn.rect.width, ele->btn.rect.height, ele->btn.bgColor);
 }
 
 // panel
@@ -101,8 +99,8 @@ int UIManifestPanel_Click(UIManifestPanel* panel, Vector2 mouseWorldPos, bool is
     for (int i = 0; i < panel->eleCount; i++) {
         UIManifest* ele = &panel->elements[i];
         // 点到
-        if (UIManifest_ElementClickNoFade(ele, mouseWorldPos, isMouseDown)) {
-            printf("%d",ele->typeID);
+        if (UIManifest_ElementClick(ele, mouseWorldPos, isMouseDown)) {
+            printf("%d", ele->typeID);
             return ele->typeID; // 返回点击的是哪一个
         }
     }
@@ -116,10 +114,14 @@ void UIManifest_Close(UIManifestPanel* panel) {
 }
 
 // 画
-void UIManifestPanel_Draw(UIManifestPanel* panel) {
+void UIManifestPanel_Draw(UIManifestPanel* panel,bool isMouseDown) {
+
     if (!panel->isOpen) {
         return;
     }
+
+     
+
     for (int i = 0; i < panel->eleCount; i++) {
         UIManifest* ele = &panel->elements[i];
         UIManifest_Draw(ele);

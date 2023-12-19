@@ -24,8 +24,12 @@ MonsterEntity* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, 
     return mst;
 }
 
-CellEntity* Factory_CreateCell(Color color, Vector2 pos, Vector2 size) {
+CellEntity* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int towerIDRecord) {
     CellEntity* tower = (CellEntity*)malloc(sizeof(CellEntity));
+
+    // tower->ID = towerID[count];
+    tower->ID = towerIDRecord;
+
     tower->isInside = false;
     tower->color = color;
     tower->height = size.y;
@@ -34,6 +38,5 @@ CellEntity* Factory_CreateCell(Color color, Vector2 pos, Vector2 size) {
     tower->pos.y = pos.y;
     return tower;
 }
-
 
 #endif
