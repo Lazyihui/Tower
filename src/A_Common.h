@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include "../include/raylib.h"
 #include "../include/raymath.h"
+enum GAME_STATUS {
+    GAME_STATUS_LOGIN, GAME_STATUS_GAME, GAME_STATUS_OVER
+};
 const int cellsize = 70;
 
 Vector2 Vector2_New(float x, float y) {

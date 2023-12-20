@@ -3,7 +3,6 @@
 #include "../include/raymath.h"
 #include "A_Ctx.h"
 #include "A_Common.h"
-#include "C_UI.h"
 #include "E_Mst.h"
 #include "C_Monster.h"
 #include "E_Cell.h"
@@ -11,35 +10,19 @@
 #include "E_Input.h"
 #include "TowerManifestPanel.h"
 #include "E_UIManifest.h"
-
-void Draw_AllWorld(Ctx* ctx) {
-    // 路
-    DrawRectangle(-50, -200, 100, 400, BROWN);
-    // tower
-
-    for (int i = 0; i < ctx->cellCount; i++) {
-        C_Cell* UITower = ctx->cellArr[i];
-        Draw_TowerCell(UITower);
-    }
-
-    // monster
-    for (int i = 0; i < ctx->mstCount; i++) {
-        E_Mst* mst = ctx->mstarr[i];
-        if (mst->isLive) {
-
-            Draw_MonsterEntity(mst);
-        }
-    }
-}
+#include "B_Login.h"
+#include "B_Game.h"
 
 // offset+target
 int main() {
+
     InitWindow(800, 400, "Tower");
 
     Ctx ctx = {0};
-    ContextInit(&ctx);
 
-    TowerController_Init(&ctx);
+    // ==== Init ====
+    ContextInit(&ctx);
+    B_Game_Init(&ctx);
 
     while (!WindowShouldClose()) {
 
@@ -54,47 +37,30 @@ int main() {
         E_Input* input = &ctx.input;
         Input_Process(input, ctx.camera.camera.offset);
 
-        UI_panel* panel = &ctx.panel;
-
         // CameraEntity_Follow();
-        // logic
-        if (ctx.gameStatus == 0) {
-            bool isInside = GUIButton_IsMouseInside(&ctx.btnStartGame, input->mousePos);
-
-            if (isInside && input->isMouseDown) {
-                ctx.gameStatus = 1;
-            }
-        } else if (ctx.gameStatus == 1) {
-
-            MonsterEntitySpawn_Tick(&ctx, dt);
-
-            if (panel->isOpen) {
-
-                int typeID = UIManifestPanel_Click(panel, input->mouseWorldPos, input->isMouseDown);
-            }
-            TowerControllerPanel_IsClick(&ctx);
-            TowerControllerEle_IsClick(&ctx);
+        // ==== logic ====
+        if (ctx.gameStatus == GAME_STATUS_LOGIN) {
+            B_Login_Tick(&ctx, dt);
+        } else if (ctx.gameStatus == GAME_STATUS_GAME) {
+            B_Game_Tick(&ctx, dt);
         }
 
-        // Draw
-        if (ctx.gameStatus == 0) {
+        // ==== Draw World ====
+        if (ctx.gameStatus == GAME_STATUS_LOGIN) {
 
-        } else if (ctx.gameStatus == 1) {
-
-            UIManifestPanel_Draw(panel, input->isMouseDown);
-
-            Draw_AllWorld(&ctx);
+        } else if (ctx.gameStatus == GAME_STATUS_GAME) {
+            B_Game_DrawWorld(&ctx);
+            B_Game_DrawWorldUI(&ctx);
         }
 
         EndMode2D();
 
+        // ==== Draw UI ====
         // UI屏幕 00 在左上角 draw
-        if (ctx.gameStatus == 0) {
-            UIController_LoginDraw(&ctx);
-
-        } else if (ctx.gameStatus == 1) {
-
-            UIController_WorldDraw(&ctx, dt);
+        if (ctx.gameStatus == GAME_STATUS_LOGIN) {
+            B_Login_DrawUI(&ctx);
+        } else if (ctx.gameStatus == GAME_STATUS_GAME) {
+            B_Game_DrawScreenUI(&ctx);
         }
 
         EndDrawing();

@@ -4,9 +4,10 @@
 #include "E_Mst.h"
 #include "A_Common.h"
 
-void MonsterEntitySpawn_Tick(Ctx* ctx, float dt) {
+void C_mst_Tick(Ctx* ctx, float dt) {
     // 注意
     ctx->mstSpawnTimer -= dt;
+
     if (ctx->mstSpawnTimer <= 0) {
         // 次数
         for (int i = 0; i < 1; i++) {
@@ -16,6 +17,7 @@ void MonsterEntitySpawn_Tick(Ctx* ctx, float dt) {
         }
         ctx->mstSpawnTimer = ctx->mstSpawnInterval;
     }
+    
     for (int i = 0; i < ctx->mstCount; i++) {
         E_Mst* mst = ctx->mstarr[i];
         if (mst->isLive) {
