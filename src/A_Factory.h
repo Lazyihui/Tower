@@ -5,16 +5,16 @@
 #include "E_Mst.h"
 #include "E_Cell.h"
 
-InputEntity* Factory_CreatInput() {
+E_Input* Factory_CreatInput() {
     // 堆: 开辟
-    InputEntity* input = (InputEntity*)malloc(sizeof(InputEntity));
+    E_Input* input = (E_Input*)malloc(sizeof(E_Input));
     input->isMouseDown = false;
     input->mousePos = Vector2Zero();
     return input;
 }
 
-MonsterEntity* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float radius, float speed) {
-    MonsterEntity* mst = (MonsterEntity*)malloc(sizeof(MonsterEntity));
+E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float radius, float speed) {
+    E_Mst* mst = (E_Mst*)malloc(sizeof(E_Mst));
     mst->isLive = true;
     mst->color = color;
     mst->moveAxis = moveDir;
@@ -24,11 +24,11 @@ MonsterEntity* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, 
     return mst;
 }
 
-CellEntity* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int towerIDRecord) {
-    CellEntity* tower = (CellEntity*)malloc(sizeof(CellEntity));
+C_Cell* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int cellIDRecord) {
+    C_Cell* tower = (C_Cell*)malloc(sizeof(C_Cell));
 
     // tower->ID = towerID[count];
-    tower->ID = towerIDRecord;
+    tower->ID = cellIDRecord;
 
     tower->isInside = false;
     tower->color = color;

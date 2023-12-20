@@ -9,8 +9,8 @@
 #include "GUI_Button.h"
 #include "E_UIManifest.h"
 
-typedef struct Context {
-    CameraEntity camera;
+typedef struct Ctx {
+    E_Camera camera;
     Vector2 targetPos;
 
     int windowWidth;
@@ -25,27 +25,27 @@ typedef struct Context {
     float goldTimer;
     float hp;
 
-    MonsterEntity* mstarr[100];
+    E_Mst* mstarr[100];
     int mstCount;
     float mstSpawnTimer;
     float mstSpawnInterval;
 
-    CellEntity* towers[10];
+    C_Cell* cellArr[10];
     // int towerID[10];
-    int towerIDRecord;
-    int towerClickID;
-    int towerCount;
-    Vector2 TwStartPos;
+    int cellIDRecord;
+    int cellClickID;
+    int cellCount;
+    Vector2 cellStartPos;
     int interval;
 
-    InputEntity input;
+    E_Input input;
 
-    UIManifestPanel panel;
+    UI_panel panel;
     int typeTower[3];
 
-} Context;
+} Ctx;
 
-void ContextInit(Context* ctx) {
+void ContextInit(Ctx* ctx) {
 
     CameraEntity_Init(&ctx->camera);
 
@@ -66,13 +66,13 @@ void ContextInit(Context* ctx) {
     ctx->mstSpawnTimer = 2;
     ctx->mstSpawnInterval = 2;
 
-    ctx->towerCount = 0;
-    ctx->TwStartPos.x = -90;
-    ctx->TwStartPos.y = 160;
+    ctx->cellCount = 0;
+    ctx->cellStartPos.x = -90;
+    ctx->cellStartPos.y = 160;
 
     // 把数组是第几个记下来
-    ctx->towerIDRecord = 0;
-    ctx->towerClickID = -1;
+    ctx->cellIDRecord = 0;
+    ctx->cellClickID = -1;
     // for (int i = 0; i < 6; i++) {
     //     ctx->towerID[i] = i;
     // }
@@ -91,17 +91,17 @@ void ContextInit(Context* ctx) {
     for (int i = 0; i < 3; i++) {
         ctx->typeTower[i] = i + 1;
     }
-    UIManifestPanel* panel = &ctx->panel;
+    UI_panel* panel = &ctx->panel;
     panel->eleCount = 0;
     panel->gapY = 5;
     panel->eleSize = 15;
     panel->isOpen = false;
 }
 
-int FindIndex_TowerByID(Context* ctx, int ID) {
+int FindIndex_TowerByID(Ctx* ctx, int ID) {
 
-    for (int i = 0; i < ctx->towerCount; i++) {
-        CellEntity* tower = ctx->towers[i];
+    for (int i = 0; i < ctx->cellCount; i++) {
+        C_Cell* tower = ctx->cellArr[i];
         if (tower->ID == ID) {
             return i;
         }
@@ -109,9 +109,9 @@ int FindIndex_TowerByID(Context* ctx, int ID) {
     return -1;
 }
 
-void ContextFree(Context* ctx) {
-    for (int i = 0; i < ctx->towerCount; i++) {
-        free(ctx->towers[i]);
+void ContextFree(Ctx* ctx) {
+    for (int i = 0; i < ctx->cellCount; i++) {
+        free(ctx->cellArr[i]);
     }
     for (int i = 0; i < ctx->mstCount; i++) {
         free(ctx->mstarr[i]);

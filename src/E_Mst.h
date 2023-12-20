@@ -3,27 +3,27 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
-typedef struct MonsterEntity {
+typedef struct E_Mst {
     Vector2 pos;
     Vector2 moveAxis;
     Color color;
     float radius;
     float speed;
     bool isLive;
-} MonsterEntity;
+} E_Mst;
 
-void MonsterEntity_Input(MonsterEntity* mst) {
+void MonsterEntity_Input(E_Mst* mst) {
     mst->moveAxis.y = -1;
 }
 
-void MonsterEntity_Move(MonsterEntity* mst, Vector2 moveAxis, float dt) {
+void MonsterEntity_Move(E_Mst* mst, Vector2 moveAxis, float dt) {
     Vector2* posptr = &mst->pos;
     Vector2 offset = Vector2Normalize(moveAxis);
     offset = Vector2Scale(offset, mst->speed * dt);
     *posptr = Vector2Add(*posptr, offset);
 }
 
-void Draw_MonsterEntity(MonsterEntity* mst) {
+void Draw_MonsterEntity(E_Mst* mst) {
     DrawCircle(mst->pos.x, mst->pos.y, mst->radius, mst->color);
 }
 

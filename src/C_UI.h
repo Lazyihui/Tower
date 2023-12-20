@@ -7,11 +7,11 @@
 #include "E_Input.h"
 #include "GUI_Button.h"
 
-void UIController_LoginDraw(Context* ctx) {
+void UIController_LoginDraw(Ctx* ctx) {
      GUIButton_Draw(&ctx->btnStartGame);
 }
 
-void UIController_WorldDraw(Context* ctx, float dt) {
+void UIController_WorldDraw(Ctx* ctx, float dt) {
     // 时间
     ctx->time += dt;
     DrawText("time", 20, 15, 20, BLACK);

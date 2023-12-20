@@ -12,19 +12,19 @@
 #include "TowerManifestPanel.h"
 #include "E_UIManifest.h"
 
-void Draw_AllWorld(Context* ctx) {
+void Draw_AllWorld(Ctx* ctx) {
     // 路
     DrawRectangle(-50, -200, 100, 400, BROWN);
     // tower
 
-    for (int i = 0; i < ctx->towerCount; i++) {
-        CellEntity* UITower = ctx->towers[i];
+    for (int i = 0; i < ctx->cellCount; i++) {
+        C_Cell* UITower = ctx->cellArr[i];
         Draw_TowerCell(UITower);
     }
 
     // monster
     for (int i = 0; i < ctx->mstCount; i++) {
-        MonsterEntity* mst = ctx->mstarr[i];
+        E_Mst* mst = ctx->mstarr[i];
         if (mst->isLive) {
 
             Draw_MonsterEntity(mst);
@@ -36,7 +36,7 @@ void Draw_AllWorld(Context* ctx) {
 int main() {
     InitWindow(800, 400, "Tower");
 
-    Context ctx = {0};
+    Ctx ctx = {0};
     ContextInit(&ctx);
 
     TowerController_Init(&ctx);
@@ -51,10 +51,10 @@ int main() {
         ClearBackground(RAYWHITE);
 
         // input
-        InputEntity* input = &ctx.input;
+        E_Input* input = &ctx.input;
         Input_Process(input, ctx.camera.camera.offset);
 
-        UIManifestPanel* panel = &ctx.panel;
+        UI_panel* panel = &ctx.panel;
 
         // CameraEntity_Follow();
         // logic
