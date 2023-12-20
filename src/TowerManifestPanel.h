@@ -1,7 +1,7 @@
 #ifndef TOWERMANIFEST_H__
 #define TOWERMANIFEST_H__
 
-#include "GUIButton.h"
+#include "GUI_Button.h"
 #include "../include/raylib.h"
 
 // typedef struct GUIButton {

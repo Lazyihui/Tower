@@ -2,10 +2,10 @@
 #define UICONTROLLER_H__
 #include "../include/raylib.h"
 #include "../include/raymath.h"
-#include "Context.h"
-#include "CellEntity.h"
-#include "InputEntity.h"
-#include "GUIButton.h"
+#include "A_Ctx.h"
+#include "E_Cell.h"
+#include "E_Input.h"
+#include "GUI_Button.h"
 
 void UIController_LoginDraw(Context* ctx) {
      GUIButton_Draw(&ctx->btnStartGame);

@@ -1,7 +1,7 @@
-#ifndef CAMERAENTITY_H__
-#define CAMERAENTITY_H__
+#ifndef E_CAMERA_H__
+#define E_CAMERA_H__
 #include "../include/raylib.h"
-#include "Common.h"
+#include "A_Common.h"
 
 
 typedef struct CameraEntity {

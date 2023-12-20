@@ -1,8 +1,8 @@
 #ifndef MONSTERCONTROLLER_H__
 #define MONSTERCONTROLLER_H__
-#include "Context.h"
-#include "MonsterEntity.h"
-#include "Common.h"
+#include "A_Ctx.h"
+#include "E_Mst.h"
+#include "A_Common.h"
 
 void MonsterEntitySpawn_Tick(Context* ctx, float dt) {
     // 注意

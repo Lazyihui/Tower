@@ -1,9 +1,9 @@
 #ifndef FACTORY_H__
 #define FACTORY_H__
 #include <stdlib.h>
-#include "InputEntity.h"
-#include "MonsterEntity.h"
-#include "CellEntity.h"
+#include "E_Input.h"
+#include "E_Mst.h"
+#include "E_Cell.h"
 
 InputEntity* Factory_CreatInput() {
     // 堆: 开辟

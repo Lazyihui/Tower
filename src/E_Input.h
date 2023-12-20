@@ -1,5 +1,5 @@
-#ifndef INPUTENTITY_H__
-#define INPUTENTITY_H__
+#ifndef E_INPUT_H__
+#define E_INPUT_H__
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 

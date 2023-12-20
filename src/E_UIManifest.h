@@ -1,8 +1,8 @@
 #ifndef UIMANIDEST_H__
 #define UIMANIDEST_H__
 
-#include "GUIButton.h"
-#include "CellEntity.h"
+#include "GUI_Button.h"
+#include "E_Cell.h"
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 

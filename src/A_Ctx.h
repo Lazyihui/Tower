@@ -1,13 +1,13 @@
 #ifndef CONTEXT_H__
 #define CONTEXT_H__
 #include "../include/raylib.h"
-#include "Factory.h"
-#include "CameraEntity.h"
-#include "MonsterEntity.h"
-#include "CellEntity.h"
-#include "InputEntity.h"
-#include "GUIButton.h"
-#include "UIManifest.h"
+#include "A_Factory.h"
+#include "E_Camera.h"
+#include "E_Mst.h"
+#include "E_Cell.h"
+#include "E_Input.h"
+#include "GUI_Button.h"
+#include "E_UIManifest.h"
 
 typedef struct Context {
     CameraEntity camera;

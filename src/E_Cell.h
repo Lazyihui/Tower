@@ -1,8 +1,8 @@
-#ifndef TOWERENETITY_H__
-#define TOWERENETITY_H__
+#ifndef E_CELL_H__
+#define E_CELL_H__
 #include "../include/raylib.h"
 #include "../include/raymath.h"
-#include "Common.h"
+#include "A_Common.h"
 
 typedef struct CellEntity {
     int ID;
