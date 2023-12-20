@@ -21,7 +21,7 @@ void C_mst_Tick(Ctx* ctx, float dt) {
     for (int i = 0; i < ctx->mstCount; i++) {
         E_Mst* mst = ctx->mstarr[i];
         if (mst->isLive) {
-            MonsterEntity_Move(mst, mst->moveAxis, dt);
+            E_Mst_Move(mst, mst->moveAxis, dt);
         }
     }
 }

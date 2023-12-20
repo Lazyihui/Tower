@@ -11,7 +11,7 @@ void C_UserInterface_Tick(Ctx* ctx, float dt) {
     // Tower Click
     UI_panel* panel = &ctx->panel;
     if (panel->isOpen) {
-        int typeID = UIManifestPanel_Click(panel, input->mouseWorldPos, input->isMouseDown);
+        int typeID = UI_Panel_Click(panel, input->mouseWorldPos, input->isMouseDown);
     }
     TowerControllerPanel_IsClick(ctx);
     TowerControllerEle_IsClick(ctx);
@@ -25,7 +25,7 @@ void TowerControllerPanel_IsClick(Ctx* ctx) {
 
         C_Cell* cell = ctx->cellArr[i];
 
-        cell->isInside = CellEntity_IsMouseInside(cell, input->mouseWorldPos);
+        cell->isInside = C_Cell_IsMouseInside(cell, input->mouseWorldPos);
 
         if (cell->isInside && input->isMouseDown) {
             // 等于panel->isOpen = true; and panel->isOpen=false; 并起来
@@ -36,10 +36,10 @@ void TowerControllerPanel_IsClick(Ctx* ctx) {
             if (panel->isOpen) {
                 for (int i = 0; i < 3; i++) {
                     int typeID = ctx->typeTower[i];
-                    UIManifestPanel_AddElement(panel, Vector2_New(cell->pos.x - 20, cell->pos.y), typeID);
+                    UI_Panel_AddElement(panel, Vector2_New(cell->pos.x - 20, cell->pos.y), typeID);
                 }
             } else {
-                UIManifest_Close(panel);
+                UI_Panel_Close(panel);
             }
         }
     }
@@ -55,14 +55,14 @@ void TowerControllerEle_IsClick(Ctx* ctx) {
 
             UI_PanelEle* ele = &ctx->panel.elements[i];
 
-            ele->isClick = UIManifestEle_IsMouseInside(ele, input->mouseWorldPos);
+            ele->isClick = UI_PanelEle_IsMouseInside(ele, input->mouseWorldPos);
             if (ele->isClick && input->isMouseDown) {
 
                 int index = FindIndex_TowerByID(ctx, ctx->cellClickID);
                 
                 cellArr[index]->color = ele->btn.bgColor;
 
-                UIManifest_Close(panel);
+                UI_Panel_Close(panel);
                 break;
             }
         }

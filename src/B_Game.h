@@ -23,6 +23,7 @@ void B_Game_Tick(Ctx* ctx, float dt) {
         ctx->goldTimer = ctx->goldInterval;
     }
 
+
     // Monster Spawn
     C_mst_Tick(ctx, dt);
 
@@ -42,7 +43,7 @@ void B_Game_DrawWorld(Ctx* ctx) {
     for (int i = 0; i < ctx->mstCount; i++) {
         E_Mst* mst = ctx->mstarr[i];
         if (mst->isLive) {
-            Draw_MonsterEntity(mst);
+            E_Mst_Draw(mst);
         }
     }
 }
@@ -50,7 +51,7 @@ void B_Game_DrawWorld(Ctx* ctx) {
 void B_Game_DrawWorldUI(Ctx* ctx) {
     // 建造菜单
     UI_panel* panel = &ctx->panel;
-    UIManifestPanel_Draw(panel, ctx->input.isMouseDown);
+    UI_Panel_Draw(panel, ctx->input.isMouseDown);
 }
 
 void B_Game_DrawScreenUI(Ctx* ctx) {
@@ -67,6 +68,7 @@ void B_Game_DrawScreenUI(Ctx* ctx) {
     DrawRectangle(20, 60, 100, 15, RED);
     DrawRectangle(20, 60, ctx->hp, 15, GREEN);
 
+    //要改的
     if (IsKeyPressed(KEY_SPACE)) {
         ctx->hp -= 10;
     }

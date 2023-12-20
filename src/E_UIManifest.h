@@ -21,7 +21,7 @@ typedef struct UI_PanelEle {
 
 // }
 // element
-UI_PanelEle UIManifest_CraeteTower(int index, int typeID, Vector2 pos, Vector2 size) {
+UI_PanelEle UI_PanelEle_CraeteTowerType(int index, int typeID, Vector2 pos, Vector2 size) {
     UI_PanelEle ele = (UI_PanelEle){0};
     ele.index = index;
     ele.typeID = typeID;
@@ -58,19 +58,19 @@ UI_PanelEle UIManifest_CraeteTower(int index, int typeID, Vector2 pos, Vector2 s
 }
 
 // 点到会消失
-bool UIManifest_ElementClick(UI_PanelEle* ele, Vector2 mousePos, bool isMouseDown) {
+bool UI_PanelEle_Click(UI_PanelEle* ele, Vector2 mousePos, bool isMouseDown) {
 
     return GUIButton_IsMouseClick(&ele->btn, mousePos, isMouseDown);
 }
 
-bool UIManifestEle_IsMouseInside(UI_PanelEle* ele, Vector2 mouseWorldPos) {
+bool UI_PanelEle_IsMouseInside(UI_PanelEle* ele, Vector2 mouseWorldPos) {
 
     ele->isClick = IsRectInsideMouse(Vector2_New(ele->btn.rect.x, ele->btn.rect.y), ele->btn.rect.width,
                                      ele->btn.rect.height, mouseWorldPos);
     return ele->isClick;
 }
 
-void UIManifest_Draw(UI_PanelEle* ele) {
+void UI_panelEle_Draw(UI_PanelEle* ele) {
     DrawRectangle(ele->btn.rect.x, ele->btn.rect.y, ele->btn.rect.width, ele->btn.rect.height, ele->btn.bgColor);
 }
 
@@ -85,21 +85,21 @@ typedef struct UI_panel {
     bool isInside;
 } UI_panel;
 
-void UIManifestPanel_AddElement(UI_panel* panel, Vector2 worldPos, int typeID) {
+void UI_Panel_AddElement(UI_panel* panel, Vector2 worldPos, int typeID) {
     panel->startPos = worldPos;
     int count = panel->eleCount;
     Vector2 pos = Vector2Add(worldPos, Vector2_New(0, panel->gapY * count + panel->eleSize * count));
-    UI_PanelEle ele = UIManifest_CraeteTower(count, typeID, pos, Vector2_New(panel->eleSize, panel->eleSize));
+    UI_PanelEle ele = UI_PanelEle_CraeteTowerType(count, typeID, pos, Vector2_New(panel->eleSize, panel->eleSize));
     panel->elements[count] = ele;
     panel->eleCount++;
 }
 
-int UIManifestPanel_Click(UI_panel* panel, Vector2 mouseWorldPos, bool isMouseDown) {
+int UI_Panel_Click(UI_panel* panel, Vector2 mouseWorldPos, bool isMouseDown) {
 
     for (int i = 0; i < panel->eleCount; i++) {
         UI_PanelEle* ele = &panel->elements[i];
         // 点到
-        if (UIManifest_ElementClick(ele, mouseWorldPos, isMouseDown)) {
+        if (UI_PanelEle_Click(ele, mouseWorldPos, isMouseDown)) {
             printf("%d", ele->typeID);
             return ele->typeID; // 返回点击的是哪一个
         }
@@ -108,13 +108,13 @@ int UIManifestPanel_Click(UI_panel* panel, Vector2 mouseWorldPos, bool isMouseDo
 }
 
 // 所以都关闭
-void UIManifest_Close(UI_panel* panel) {
+void UI_Panel_Close(UI_panel* panel) {
     panel->eleCount = 0;
     panel->isOpen = false;
 }
 
 // 画
-void UIManifestPanel_Draw(UI_panel* panel, bool isMouseDown) {
+void UI_Panel_Draw(UI_panel* panel, bool isMouseDown) {
 
     if (!panel->isOpen) {
         return;
@@ -122,7 +122,7 @@ void UIManifestPanel_Draw(UI_panel* panel, bool isMouseDown) {
 
     for (int i = 0; i < panel->eleCount; i++) {
         UI_PanelEle* ele = &panel->elements[i];
-        UIManifest_Draw(ele);
+        UI_panelEle_Draw(ele);
     }
 }
 

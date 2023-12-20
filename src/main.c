@@ -35,7 +35,7 @@ int main() {
 
         // input
         E_Input* input = &ctx.input;
-        Input_Process(input, ctx.camera.camera.offset);
+        E_Input_Process(input, ctx.camera.camera.offset);
 
         // CameraEntity_Follow();
         // ==== logic ====

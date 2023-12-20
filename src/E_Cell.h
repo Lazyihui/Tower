@@ -15,7 +15,7 @@ typedef struct C_Cell {
 } C_Cell;
 
 // tower和鼠标的检测
-bool CellEntity_IsMouseInside(C_Cell* cell, Vector2 mousePos) {
+bool C_Cell_IsMouseInside(C_Cell* cell, Vector2 mousePos) {
     cell->isInside = IsRectInsideMouse(cell->pos, cell->width, cell->height, mousePos);
     // return cell;
     if (cell->isInside) {
@@ -26,11 +26,12 @@ bool CellEntity_IsMouseInside(C_Cell* cell, Vector2 mousePos) {
 }
 
 // 画格子（塔）
-void Draw_TowerCell(C_Cell* cell) {
+void C_Cell_Draw(C_Cell* cell) {
     DrawRectangle(cell->pos.x, cell->pos.y, cell->width, cell->width, cell->color);
 }
 
-void Draw_Tower(C_Cell* cell, bool isElementClick) {
+// 没用到目前
+void C_Cell_DrawEleIsclickColor(C_Cell* cell, bool isElementClick) {
     Color color;
     if (!isElementClick) {
         color = BLUE;

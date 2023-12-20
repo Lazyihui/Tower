@@ -9,7 +9,7 @@ typedef struct E_Input {
     bool isMouseDown;
 } E_Input;
 
-void Input_Process(E_Input* input, Vector2 cameraOffset) {
+void E_Input_Process(E_Input* input, Vector2 cameraOffset) {
     input->isMouseDown = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
     input->mousePos = GetMousePosition();
     input->mouseWorldPos = Vector2Subtract(input->mousePos, cameraOffset);

@@ -25,7 +25,7 @@ void C_Cell_Init(Ctx* ctx) {
 void C_Cell_DrawWorld(Ctx* ctx) {
     for (int i = 0; i < ctx->cellCount; i++) {
         C_Cell* UITower = ctx->cellArr[i];
-        Draw_TowerCell(UITower);
+        C_Cell_Draw(UITower);
     }
 }
 
