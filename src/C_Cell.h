@@ -12,7 +12,7 @@
 void C_Cell_Init(Ctx* ctx) {
     // 盒子初始化
     for (int i = 0; i < 6; i++) {
-        C_Cell* cell =
+        E_Cell* cell =
             Factory_CreateCell(BLUE, Vector2_New(-90, 160 - i * cellsize), Vector2_New(20, 20), ctx->cellIDRecord);
         // 一定要找一个东西把数据存下来
         ctx->cellArr[ctx->cellCount] = cell;
@@ -24,7 +24,7 @@ void C_Cell_Init(Ctx* ctx) {
 
 void C_Cell_DrawWorld(Ctx* ctx) {
     for (int i = 0; i < ctx->cellCount; i++) {
-        C_Cell* UITower = ctx->cellArr[i];
+        E_Cell* UITower = ctx->cellArr[i];
         C_Cell_Draw(UITower);
     }
 }

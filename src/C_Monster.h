@@ -11,7 +11,7 @@ void C_mst_Tick(Ctx* ctx, float dt) {
     if (ctx->mstSpawnTimer <= 0) {
         // 次数
         for (int i = 0; i < 1; i++) {
-            E_Mst* mst = Factory_CreateMonster(RED, Vector2_New(0, -1), Vector2_New(0, 210), 5, 50);
+            E_Mst* mst = Factory_CreateMonster(RED, Vector2_New(0, -1), Vector2_New(0, 210), 5, 50,5);
             ctx->mstarr[ctx->mstCount] = mst;
             ctx->mstCount += 1;
         }

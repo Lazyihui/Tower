@@ -5,17 +5,17 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
-typedef struct C_Cell {
+typedef struct E_Cell {
     int ID;
     float width;
     float height;
     Vector2 pos;
     Color color;
     bool isInside;
-} C_Cell;
+} E_Cell;
 
 // tower和鼠标的检测
-bool C_Cell_IsMouseInside(C_Cell* cell, Vector2 mousePos) {
+bool C_Cell_IsMouseInside(E_Cell* cell, Vector2 mousePos) {
     cell->isInside = IsRectInsideMouse(cell->pos, cell->width, cell->height, mousePos);
     // return cell;
     if (cell->isInside) {
@@ -26,12 +26,12 @@ bool C_Cell_IsMouseInside(C_Cell* cell, Vector2 mousePos) {
 }
 
 // 画格子（塔）
-void C_Cell_Draw(C_Cell* cell) {
+void C_Cell_Draw(E_Cell* cell) {
     DrawRectangle(cell->pos.x, cell->pos.y, cell->width, cell->width, cell->color);
 }
 
 // 没用到目前
-void C_Cell_DrawEleIsclickColor(C_Cell* cell, bool isElementClick) {
+void C_Cell_DrawEleIsclickColor(E_Cell* cell, bool isElementClick) {
     Color color;
     if (!isElementClick) {
         color = BLUE;

@@ -4,6 +4,18 @@
 #include "E_Input.h"
 #include "E_Mst.h"
 #include "E_Cell.h"
+#include "E_Bullet.h"
+
+E_Bullet* Factory_CreatBullet(Color color, Vector2 moveAxis, Vector2 pos, float radius, float speed) {
+    E_Bullet* blt = (E_Bullet*)malloc(sizeof(E_Bullet));
+    blt->color = color;
+    blt->isActive = false;
+    blt->moveAxis = moveAxis;
+    blt->pos = pos;
+    blt->radius = radius;
+    blt->speed = speed;
+    return blt;
+}
 
 E_Input* Factory_CreatInput() {
     // 堆: 开辟
@@ -13,7 +25,7 @@ E_Input* Factory_CreatInput() {
     return input;
 }
 
-E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float radius, float speed) {
+E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float radius, float speed, int hp) {
     E_Mst* mst = (E_Mst*)malloc(sizeof(E_Mst));
     mst->isLive = true;
     mst->color = color;
@@ -21,11 +33,12 @@ E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float ra
     mst->pos = pos;
     mst->radius = radius;
     mst->speed = speed;
+    mst->hp = hp;
     return mst;
 }
 
-C_Cell* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int cellIDRecord) {
-    C_Cell* tower = (C_Cell*)malloc(sizeof(C_Cell));
+E_Cell* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int cellIDRecord) {
+    E_Cell* tower = (E_Cell*)malloc(sizeof(E_Cell));
 
     // tower->ID = towerID[count];
     tower->ID = cellIDRecord;

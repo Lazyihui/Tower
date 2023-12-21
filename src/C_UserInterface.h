@@ -6,6 +6,9 @@
 void TowerControllerPanel_IsClick(Ctx* ctx);
 void TowerControllerEle_IsClick(Ctx* ctx);
 
+
+
+
 void C_UserInterface_Tick(Ctx* ctx, float dt) {
     E_Input *input = &ctx->input;
     // Tower Click
@@ -17,13 +20,16 @@ void C_UserInterface_Tick(Ctx* ctx, float dt) {
     TowerControllerEle_IsClick(ctx);
 }
 
+
+
+
 void TowerControllerPanel_IsClick(Ctx* ctx) {
     E_Input* input = &ctx->input;
     UI_panel* panel = &ctx->panel;
 
     for (int i = 0; i < ctx->cellCount; i++) {
 
-        C_Cell* cell = ctx->cellArr[i];
+        E_Cell* cell = ctx->cellArr[i];
 
         cell->isInside = C_Cell_IsMouseInside(cell, input->mouseWorldPos);
 
@@ -48,7 +54,7 @@ void TowerControllerPanel_IsClick(Ctx* ctx) {
 void TowerControllerEle_IsClick(Ctx* ctx) {
     E_Input* input = &ctx->input;
     UI_panel* panel = &ctx->panel;
-    C_Cell** cellArr = ctx->cellArr;
+    E_Cell** cellArr = ctx->cellArr;
     if (panel->isOpen) {
 
         for (int i = 0; i < ctx->panel.eleCount; i++) {
@@ -66,11 +72,6 @@ void TowerControllerEle_IsClick(Ctx* ctx) {
                 break;
             }
         }
-        // if (ele->isClick && input->isMouseDown) {
-
-        //     ctx->cellArr[ctx->cellIDRecord]->color = ele->btn.bgColor;
-
-        // }
     }
 }
 

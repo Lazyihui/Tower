@@ -7,9 +7,11 @@ typedef struct E_Mst {
     Vector2 pos;
     Vector2 moveAxis;
     Color color;
+    int hp;
     float radius;
     float speed;
     bool isLive;
+
 } E_Mst;
 
 void E_Mst_Input(E_Mst* mst) {

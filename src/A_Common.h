@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "../include/raylib.h"
 #include "../include/raymath.h"
+
 enum GAME_STATUS {
     GAME_STATUS_LOGIN, GAME_STATUS_GAME, GAME_STATUS_OVER
 };
@@ -32,6 +33,17 @@ bool IsRectInsideMouseRec(Rectangle rect, Vector2 mousePos) {
         return true;
     } else {
         return false;
+    }
+}
+
+//圆和圆的交叉检测
+bool IsCirlceInsideCircle(float hookr, float rockr, Vector2 hooky, Vector2 rocky) {
+    Vector2 diff = Vector2Subtract(hooky, rocky);
+    float lengthsqr = Vector2LengthSqr(diff);
+    if (lengthsqr >= (hookr + rockr) * (hookr + rockr)) {
+        return false;
+    } else {
+        return true;
     }
 }
 

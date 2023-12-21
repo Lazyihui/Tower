@@ -6,6 +6,7 @@
 #include "E_Mst.h"
 #include "E_Cell.h"
 #include "E_Input.h"
+#include "E_Bullet.h"
 #include "GUI_Button.h"
 #include "E_UIManifest.h"
 
@@ -30,7 +31,7 @@ typedef struct Ctx {
     float mstSpawnTimer;
     float mstSpawnInterval;
 
-    C_Cell* cellArr[10];
+    E_Cell* cellArr[10];
     // int towerID[10];
     int cellIDRecord;
     int cellClickID;
@@ -42,6 +43,11 @@ typedef struct Ctx {
 
     UI_panel panel;
     int typeTower[3];
+
+    E_Bullet* bltarr[100];
+    int bltCount;
+    int bltSpawnTimer;
+    int bltSpawnInterval;
 
 } Ctx;
 
@@ -96,12 +102,16 @@ void ContextInit(Ctx* ctx) {
     panel->gapY = 5;
     panel->eleSize = 15;
     panel->isOpen = false;
+
+    ctx->bltCount = 0;
+    ctx->bltSpawnTimer = 2;
+    ctx->bltSpawnInterval = 2;
 }
 
 int FindIndex_TowerByID(Ctx* ctx, int ID) {
 
     for (int i = 0; i < ctx->cellCount; i++) {
-        C_Cell* tower = ctx->cellArr[i];
+        E_Cell* tower = ctx->cellArr[i];
         if (tower->ID == ID) {
             return i;
         }
@@ -116,6 +126,10 @@ void ContextFree(Ctx* ctx) {
     for (int i = 0; i < ctx->mstCount; i++) {
         free(ctx->mstarr[i]);
     }
+    for (int i = 0; i < ctx->bltCount; i++) {
+        free(ctx->bltarr[i]);
+    }
+
     free(ctx);
 }
 
