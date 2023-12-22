@@ -25,6 +25,8 @@ E_Input* Factory_CreatInput() {
     return input;
 }
 
+
+
 E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float radius, float speed, int hp) {
     E_Mst* mst = (E_Mst*)malloc(sizeof(E_Mst));
     mst->isLive = true;

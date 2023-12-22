@@ -10,7 +10,12 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
-bool E_Bullet_IsInsideMst(E_Bullet* blt, E_Mst* mst);
+
+bool C_Blt_IsInsideMst(E_Bullet* blt, E_Mst* mst) {
+    blt->isActive = IsCirlceInsideCircle(blt->radius, mst->radius, blt->pos, mst->pos);
+    return blt->isActive;
+}
+
 
 void C_Blt_Logic(Ctx* ctx, float dt) {
 
@@ -25,8 +30,8 @@ void C_Blt_Logic(Ctx* ctx, float dt) {
 
                 E_Bullet_Move(blt, blt->moveAxis, dt);
                 // blt mst 碰到消失
-                blt->isActive = E_Bullet_IsInsideMst(blt, mst);
-                if (blt->isActive) {
+                blt->isActive = C_Blt_IsInsideMst(blt, mst);
+                if (!blt->isActive) {
                     E_Bullet_Close(blt);
                     // 后面改
                     mst->hp -= 1;
@@ -35,6 +40,8 @@ void C_Blt_Logic(Ctx* ctx, float dt) {
         }
     }
 }
+
+
 
 void E_Blt_CellIsClick(Ctx* ctx) {
 
@@ -51,6 +58,9 @@ void E_Blt_CellIsClick(Ctx* ctx) {
         }
     }
 }
+
+
+
 void C_blt_Creat(Ctx* ctx, float dt) {
 
     if () {
@@ -68,10 +78,7 @@ void C_blt_Creat(Ctx* ctx, float dt) {
     }
 }
 
-bool C_Blt_IsInsideMst(E_Bullet* blt, E_Mst* mst) {
-    blt->isActive = IsCirlceInsideCircle(blt->radius, mst->radius, blt->pos, mst->pos);
-    return blt->isActive;
-}
+
 
 // 这个放在哪里？
 void E_Blts_Draw(Ctx* ctx) {

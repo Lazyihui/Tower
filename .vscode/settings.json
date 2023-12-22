@@ -15,6 +15,8 @@
         "uicontroller.h": "c",
         "cellentity.h": "c",
         "factory.h": "c",
-        "a_common.h": "c"
+        "a_common.h": "c",
+        "e_mst.h": "c",
+        "c_monster.h": "c"
     }
 }

@@ -2,6 +2,7 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 #include "A_Ctx.h"
+#include "A_FindUtil.h"
 #include "A_Common.h"
 #include "E_Mst.h"
 #include "C_Monster.h"
@@ -42,6 +43,13 @@ int main() {
         if (ctx.gameStatus == GAME_STATUS_LOGIN) {
             B_Login_Tick(&ctx, dt);
         } else if (ctx.gameStatus == GAME_STATUS_GAME) {
+
+            E_Mst* m = FindNearestMst(&ctx, Vector2Zero(), 50);
+            
+            if (m != NULL) {
+                printf("%f", m->pos.y);
+            }
+
             B_Game_Tick(&ctx, dt);
         }
 
