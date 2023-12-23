@@ -13,7 +13,7 @@ void C_mst_Tick(Ctx* ctx, float dt) {
         // 次数
         for (int i = 0; i < 1; i++) {
             // E_Mst* mst = Factory_CreateMonsterByTM(RED, Vector2_New(0, -1), Vector2_New(0, 210), 5, 50,5);
-            E_Mst* mst = Factory_CreateMonsterByTM(ctx, 1, ctx->mst_spawnPos);
+            E_Mst* mst = Factory_CreateMonsterByTM(ctx, 2, ctx->mst_spawnPos);
             ctx->mstarr[ctx->mstCount] = mst;
             ctx->mstCount += 1;
         }

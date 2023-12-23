@@ -13,7 +13,7 @@
 #include "E_UIManifest.h"
 #include "B_Login.h"
 #include "B_Game.h"
-
+#include "C_InfraStructure.h"
 // offset+target
 int main() {
 
@@ -24,7 +24,7 @@ int main() {
     // ==== Init ====
     ContextInit(&ctx);
     B_Game_Init(&ctx);
-
+    C_IFS_Init(&ctx);
     while (!WindowShouldClose()) {
 
         float dt = GetFrameTime();
@@ -45,7 +45,7 @@ int main() {
         } else if (ctx.gameStatus == GAME_STATUS_GAME) {
 
             // E_Mst* m = FindNearestMst(&ctx, Vector2Zero(), 50);
-            
+
             // if (m != NULL) {
             //     printf("%f", m->pos.y);
             // }
