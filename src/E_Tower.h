@@ -6,6 +6,8 @@
 
 typedef struct E_Tower
 {
+    int id;
+    int typeID;
     Vector2 pos;
     Color color;
     float width;

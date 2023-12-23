@@ -17,6 +17,7 @@
         "factory.h": "c",
         "a_common.h": "c",
         "e_mst.h": "c",
-        "c_monster.h": "c"
+        "c_monster.h": "c",
+        "a_ctx.h": "c"
     }
 }

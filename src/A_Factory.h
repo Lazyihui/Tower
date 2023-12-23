@@ -5,6 +5,8 @@
 #include "E_Mst.h"
 #include "E_Cell.h"
 #include "E_Bullet.h"
+#include "A_Ctx.h"
+#include "Util_Template.h"
 
 E_Bullet* Factory_CreatBullet(Color color, Vector2 moveAxis, Vector2 pos, float radius, float speed) {
     E_Bullet* blt = (E_Bullet*)malloc(sizeof(E_Bullet));
@@ -25,8 +27,6 @@ E_Input* Factory_CreatInput() {
     return input;
 }
 
-
-
 E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float radius, float speed, int hp) {
     E_Mst* mst = (E_Mst*)malloc(sizeof(E_Mst));
     mst->isLive = true;
@@ -39,14 +39,32 @@ E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float ra
     return mst;
 }
 
+E_Mst* Factory_CreateMonsterByTM(Ctx* ctx, int typeID, Vector2 pos) {
 
-//比较完整
+    TM_Mst* tm = TM_Mst_Find(ctx, typeID);
+
+    E_Mst* mst = (E_Mst*)malloc(sizeof(E_Mst));
+    mst->isLive = true;
+    mst->moveAxis = Vector2_New(0, -1);
+    mst->typeID = tm->typeID;
+    mst->color = tm->color;
+    mst->hp = tm->hp;
+    mst->radius = tm->radius;
+    mst->speed = tm->speed;
+
+    mst->pos = pos;
+    mst->id = 0;
+
+    return mst;
+}
+
+// 比较完整
 E_Cell* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int cellIDRecord) {
     E_Cell* tower = (E_Cell*)malloc(sizeof(E_Cell));
 
     // tower->ID = towerID[count];
     tower->ID = cellIDRecord;
-    tower->cellToTower=false;
+    tower->cellToTower = false;
     tower->isInside = false;
     tower->color = color;
     tower->height = size.y;

@@ -3,13 +3,24 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
-typedef struct E_Mst {
-    Vector2 pos;
-    Vector2 moveAxis;
+typedef struct TM_Mst {
+    int typeID;
     Color color;
-    int hp;
     float radius;
     float speed;
+    int hp;
+} TM_Mst;
+
+typedef struct E_Mst {
+    int id;
+    int typeID; // 1 Small, 2 Middle, 3 Big
+    Color color;
+    float radius;
+    float speed;
+    int hp;
+
+    Vector2 pos;
+    Vector2 moveAxis;
     bool isLive;
 
 } E_Mst;

@@ -1,7 +1,7 @@
 #ifndef CONTEXT_H__
 #define CONTEXT_H__
+#include <stdlib.h>
 #include "../include/raylib.h"
-#include "A_Factory.h"
 #include "E_Camera.h"
 #include "E_Mst.h"
 #include "E_Cell.h"
@@ -30,6 +30,7 @@ typedef struct Ctx {
     int mstCount;
     float mstSpawnTimer;
     float mstSpawnInterval;
+    Vector2 mst_spawnPos;
 
     E_Cell* cellArr[10];
     Vector2 cellStartPos;
@@ -49,9 +50,37 @@ typedef struct Ctx {
     float bltSpawnTimer;
     float bltSpawnInterval;
 
+    TM_Mst* mst_template;
+    int mst_templateLen;
+    int mst_templateCount;
+
 } Ctx;
 
 void ContextInit(Ctx* ctx) {
+
+    ctx->mst_templateLen = 100;
+    ctx->mst_template = malloc(sizeof(TM_Mst) * ctx->mst_templateLen);
+
+    // ==== Template ====
+    TM_Mst* template = ctx->mst_template;
+    TM_Mst mst_small;
+    mst_small.typeID = 1;
+    mst_small.speed = 20;
+    mst_small.radius = 10;
+    mst_small.color = WHITE;
+    mst_small.hp = 1;
+    template[0] = mst_small;
+
+    TM_Mst mst_mid;
+    mst_mid.typeID = 2;
+    mst_mid.speed = 30;
+    mst_mid.radius = 20;
+    mst_mid.color = GRAY;
+    mst_mid.hp = 2;
+    template[1] = mst_mid;
+    ctx->mst_templateCount = 2;
+    ctx->mst_spawnPos = Vector2_New(0, 210);
+    // ==================
 
     CameraEntity_Init(&ctx->camera);
 
@@ -108,7 +137,7 @@ void ContextInit(Ctx* ctx) {
     ctx->bltSpawnInterval = 2;
 }
 
-//找到数组里的某个ID  之前不会写
+// 找到数组里的某个ID  之前不会写
 int FindIndex_TowerByID(Ctx* ctx, int ID) {
 
     for (int i = 0; i < ctx->cellCount; i++) {
@@ -120,14 +149,18 @@ int FindIndex_TowerByID(Ctx* ctx, int ID) {
     return -1;
 }
 
-
 void ContextFree(Ctx* ctx) {
+
+    free(ctx->mst_template);
+
     for (int i = 0; i < ctx->cellCount; i++) {
         free(ctx->cellArr[i]);
     }
+
     for (int i = 0; i < ctx->mstCount; i++) {
         free(ctx->mstarr[i]);
     }
+
     for (int i = 0; i < ctx->bltCount; i++) {
         free(ctx->bltarr[i]);
     }
