@@ -39,12 +39,14 @@ E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float ra
     return mst;
 }
 
+
+//比较完整
 E_Cell* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int cellIDRecord) {
     E_Cell* tower = (E_Cell*)malloc(sizeof(E_Cell));
 
     // tower->ID = towerID[count];
     tower->ID = cellIDRecord;
-
+    tower->cellToTower=false;
     tower->isInside = false;
     tower->color = color;
     tower->height = size.y;

@@ -62,11 +62,13 @@ void TowerControllerEle_IsClick(Ctx* ctx) {
             UI_PanelEle* ele = &ctx->panel.elements[i];
 
             ele->isClick = UI_PanelEle_IsMouseInside(ele, input->mouseWorldPos);
+            
             if (ele->isClick && input->isMouseDown) {
 
                 int index = FindIndex_TowerByID(ctx, ctx->cellClickID);
                 
                 cellArr[index]->color = ele->btn.bgColor;
+
 
                 UI_Panel_Close(panel);
                 break;

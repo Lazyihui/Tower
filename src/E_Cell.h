@@ -1,9 +1,8 @@
 #ifndef E_CELL_H__
 #define E_CELL_H__
-
-#include "A_Common.h"
 #include "../include/raylib.h"
 #include "../include/raymath.h"
+#include "A_Common.h"
 
 typedef struct E_Cell {
     int ID;
@@ -12,6 +11,7 @@ typedef struct E_Cell {
     Vector2 pos;
     Color color;
     bool isInside;
+    bool cellToTower;
 } E_Cell;
 
 // tower和鼠标的检测

@@ -52,6 +52,7 @@ void Text_Int(int b, int x, int y, int size, Color color) {
     DrawText(a, x, y, size, color);
 }
 
+
 const char* Vector2Text(Vector2 pos) {
     return TextFormat("x=%f y=%f\r\n", pos.x, pos.y);
 }

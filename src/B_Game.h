@@ -6,6 +6,9 @@
 #include "C_Cell.h"
 #include "E_UIManifest.h"
 #include "C_UserInterface.h"
+#include "C_Cell.h"
+#include "C_Blt.h"
+#include "C_Tower.h"
 
 void B_Game_Init(Ctx* ctx) {
     C_Cell_Init(ctx);
@@ -23,12 +26,16 @@ void B_Game_Tick(Ctx* ctx, float dt) {
         ctx->goldTimer = ctx->goldInterval;
     }
 
-
     // Monster Spawn
     C_mst_Tick(ctx, dt);
 
     // User Interface
     C_UserInterface_Tick(ctx, dt);
+
+    // shoot
+    C_Tower_FindNearestMstShoot(ctx, dt);
+    C_Cell_Tick(ctx,dt);
+    C_Blt_Tick(ctx, dt);
 }
 
 void B_Game_DrawWorld(Ctx* ctx) {
@@ -46,6 +53,9 @@ void B_Game_DrawWorld(Ctx* ctx) {
             E_Mst_Draw(mst);
         }
     }
+    // bullet
+    E_Blts_Draw(ctx);
+    
 }
 
 void B_Game_DrawWorldUI(Ctx* ctx) {
@@ -68,7 +78,7 @@ void B_Game_DrawScreenUI(Ctx* ctx) {
     DrawRectangle(20, 60, 100, 15, RED);
     DrawRectangle(20, 60, ctx->hp, 15, GREEN);
 
-    //要改的
+    // 要改的
     if (IsKeyPressed(KEY_SPACE)) {
         ctx->hp -= 10;
     }

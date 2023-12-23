@@ -44,11 +44,11 @@ int main() {
             B_Login_Tick(&ctx, dt);
         } else if (ctx.gameStatus == GAME_STATUS_GAME) {
 
-            E_Mst* m = FindNearestMst(&ctx, Vector2Zero(), 50);
+            // E_Mst* m = FindNearestMst(&ctx, Vector2Zero(), 50);
             
-            if (m != NULL) {
-                printf("%f", m->pos.y);
-            }
+            // if (m != NULL) {
+            //     printf("%f", m->pos.y);
+            // }
 
             B_Game_Tick(&ctx, dt);
         }

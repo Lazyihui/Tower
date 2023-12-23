@@ -1,14 +1,15 @@
 #ifndef A_FINDUTIL_H__
 #define A_FINDUTIL_H__
 
+#include "../include/raylib.h"
+#include "../include/raymath.h"
 #include "A_Ctx.h"
 #include "E_Mst.h"
 #include "E_Bullet.h"
-#include "../include/raylib.h"
-#include "../include/raymath.h"
+
 
 //找最值
-
+//tower找到最近的mst 
 E_Mst* FindNearestMst(Ctx* ctx, Vector2 pos, float range) {
 
     E_Mst* mstRes = NULL;

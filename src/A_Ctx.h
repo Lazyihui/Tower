@@ -32,11 +32,11 @@ typedef struct Ctx {
     float mstSpawnInterval;
 
     E_Cell* cellArr[10];
+    Vector2 cellStartPos;
     // int towerID[10];
     int cellIDRecord;
     int cellClickID;
     int cellCount;
-    Vector2 cellStartPos;
     int interval;
 
     E_Input input;
@@ -44,11 +44,10 @@ typedef struct Ctx {
     UI_panel panel;
     int typeTower[3];
 
-    E_Bullet* bltarr[100];
+    E_Bullet* bltarr[10000];
     int bltCount;
-    int bltSpawnTimer;
-    int bltSpawnInterval;
-
+    float bltSpawnTimer;
+    float bltSpawnInterval;
 
 } Ctx;
 
@@ -109,6 +108,7 @@ void ContextInit(Ctx* ctx) {
     ctx->bltSpawnInterval = 2;
 }
 
+//找到数组里的某个ID  之前不会写
 int FindIndex_TowerByID(Ctx* ctx, int ID) {
 
     for (int i = 0; i < ctx->cellCount; i++) {
@@ -119,6 +119,7 @@ int FindIndex_TowerByID(Ctx* ctx, int ID) {
     }
     return -1;
 }
+
 
 void ContextFree(Ctx* ctx) {
     for (int i = 0; i < ctx->cellCount; i++) {

@@ -5,6 +5,7 @@
 #include "A_Common.h"
 #include "A_Factory.h"
 #include "E_Input.h"
+#include "E_Bullet.h"
 #include "GUI_Button.h"
 #include "E_UIManifest.h"
 
@@ -21,6 +22,24 @@ void C_Cell_Init(Ctx* ctx) {
     }
 }
 
+void C_Cell_Tick(Ctx* ctx, float dt) {
+    for (int i = 0; i < ctx->cellCount; i++) {
+        E_Cell* cell = ctx->cellArr[i];
+        // 生成 blt
+        if (cell->cellToTower) {
+            ctx->bltSpawnTimer -= dt;
+            if (ctx->bltSpawnTimer <= 0) {
+                // pos 有问题
+                E_Bullet* blt = Factory_CreatBullet(PINK, Vector2_New(1,0), cell->pos, 5, 30);
+                blt->isActive = true;
+                ctx->bltarr[ctx->bltCount] = blt;
+                ctx->bltCount++;
+                ctx->bltSpawnTimer = ctx->bltSpawnInterval;
+
+            }
+        }
+    }
+}
 
 void C_Cell_DrawWorld(Ctx* ctx) {
     for (int i = 0; i < ctx->cellCount; i++) {
@@ -28,6 +47,5 @@ void C_Cell_DrawWorld(Ctx* ctx) {
         C_Cell_Draw(UITower);
     }
 }
-
 
 #endif
