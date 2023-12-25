@@ -32,11 +32,12 @@ void E_Blt_CellIsClick(Ctx* ctx) {
     }
 }
 
+
 void C_Blt_Tick(Ctx* ctx, float dt) {
     for (int j = 0; j < ctx->bltCount; j++) {
         E_Bullet* blt = ctx->bltarr[j];
         if (blt->isActive) {
-
+            // blt 找到的range要不一样
             E_Mst* mst = FindNearestMst(ctx, blt->pos, 150);
 
             if (mst != NULL) {

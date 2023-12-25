@@ -4,6 +4,16 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
+typedef struct TM_Tower
+{
+    int typeID;
+    int hurt;
+    Color color;
+
+}TM_Tower;
+
+
+
 typedef struct E_Tower
 {
     int id;

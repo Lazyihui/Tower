@@ -5,6 +5,7 @@
 #include "E_Camera.h"
 #include "E_Mst.h"
 #include "E_Cell.h"
+#include "E_Tower.h"
 #include "E_Input.h"
 #include "E_Bullet.h"
 #include "GUI_Button.h"
@@ -50,16 +51,17 @@ typedef struct Ctx {
     float bltSpawnTimer;
     float bltSpawnInterval;
 
+    // mst template
     TM_Mst* mst_template;
     int mst_templateLen;
     int mst_templateCount;
 
+    TM_Tower* tower_template;
+    int tower_templateCount;
+
 } Ctx;
 
 void ContextInit(Ctx* ctx) {
-
-
-   
 
     CameraEntity_Init(&ctx->camera);
 

@@ -6,10 +6,12 @@
 #include "../include/raymath.h"
 #include "Util_Template.h"
 #include "E_Mst.h"
+#include "E_Tower.h"
 #include "A_Ctx.h"
 
+// infrastructure 基础建设
 
-void C_IFS_Init(Ctx* ctx) {
+void C_InfraStructure_MstInit(Ctx* ctx) {
 
     ctx->mst_templateLen = 100;
     ctx->mst_template = (TM_Mst*)malloc(sizeof(TM_Mst) * ctx->mst_templateLen);
@@ -33,6 +35,31 @@ void C_IFS_Init(Ctx* ctx) {
     ctx->mst_templateCount = 2;
     ctx->mst_spawnPos = Vector2_New(0, 210);
     // ==================
-
 }
+
+void C_InfraStructure_TowerInit(Ctx* ctx) {
+    ctx->tower_templateCount = 3;
+    ctx->tower_template = (TM_Tower*)malloc(sizeof(TM_Mst) * ctx->tower_templateCount);
+
+    TM_Tower* template = ctx->tower_template;
+    TM_Tower first;
+    first.color = RED;
+    first.hurt = 1;
+    first.typeID = 1;
+    template[0] = first;
+
+
+    TM_Tower second ;
+    second.color=PINK;
+    second.hurt=2;
+    second.typeID=2;
+    template[1]=second;
+
+    TM_Tower third;
+    third.color=PURPLE;
+    third.hurt=3;
+    third.typeID=3;
+    template[2]=third;
+}
+
 #endif

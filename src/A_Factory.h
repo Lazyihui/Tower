@@ -27,6 +27,7 @@ E_Input* Factory_CreatInput() {
     return input;
 }
 
+//这是一种mst的写法
 E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float radius, float speed, int hp) {
     E_Mst* mst = (E_Mst*)malloc(sizeof(E_Mst));
     mst->isLive = true;
@@ -39,6 +40,8 @@ E_Mst* Factory_CreateMonster(Color color, Vector2 moveDir, Vector2 pos, float ra
     return mst;
 }
 
+//这是多种mst的写法
+// typeID 就是哪一种
 E_Mst* Factory_CreateMonsterByTM(Ctx* ctx, int typeID, Vector2 pos) {
 
     TM_Mst* tm = TM_Mst_Find(ctx, typeID);

@@ -18,6 +18,7 @@
         "a_common.h": "c",
         "e_mst.h": "c",
         "c_monster.h": "c",
-        "a_ctx.h": "c"
+        "a_ctx.h": "c",
+        "e_input.h": "c"
     }
 }

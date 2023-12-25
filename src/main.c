@@ -14,17 +14,18 @@
 #include "B_Login.h"
 #include "B_Game.h"
 #include "C_InfraStructure.h"
+#include "img.h"
 // offset+target
 int main() {
 
-    InitWindow(800, 400, "Tower");
-
     Ctx ctx = {0};
-
     // ==== Init ====
     ContextInit(&ctx);
     B_Game_Init(&ctx);
-    C_IFS_Init(&ctx);
+    C_InfraStructure_MstInit(&ctx);
+    C_InfraStructure_TowerInit(&ctx);
+    InitWindow(ctx.windowWidth, 400, "Tower");
+
     while (!WindowShouldClose()) {
 
         float dt = GetFrameTime();
@@ -59,6 +60,7 @@ int main() {
         } else if (ctx.gameStatus == GAME_STATUS_GAME) {
             B_Game_DrawWorld(&ctx);
             B_Game_DrawWorldUI(&ctx);
+            Draw2D_Cell(&ctx);
         }
 
         EndMode2D();
