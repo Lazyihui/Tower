@@ -4,10 +4,11 @@
 #include "../include/raylib.h"
 #include "../include/raymath.h"
 
-enum GAME_STATUS {
-    GAME_STATUS_LOGIN, GAME_STATUS_GAME, GAME_STATUS_OVER
-};
-const int cellsize = 70;
+#define cellsize 70
+#define std_cell 10
+const int std_towerCell = std_cell * 2;
+
+enum GAME_STATUS { GAME_STATUS_LOGIN, GAME_STATUS_GAME, GAME_STATUS_OVER };
 
 Vector2 Vector2_New(float x, float y) {
     Vector2 a;
@@ -36,7 +37,7 @@ bool IsRectInsideMouseRec(Rectangle rect, Vector2 mousePos) {
     }
 }
 
-//圆和圆的交叉检测
+// 圆和圆的交叉检测
 bool IsCirlceInsideCircle(float hookr, float rockr, Vector2 hooky, Vector2 rocky) {
     Vector2 diff = Vector2Subtract(hooky, rocky);
     float lengthsqr = Vector2LengthSqr(diff);
@@ -52,6 +53,14 @@ void Text_Int(int b, int x, int y, int size, Color color) {
     DrawText(a, x, y, size, color);
 }
 
+Vector2 gridToPos(float x,float y ) {
+
+    return Vector2Scale(Vector2_New(x,y), std_cell);
+}
+
+Vector2 gridToPosV(Vector2 cellPos) {
+    return Vector2Scale(cellPos, std_cell);
+}
 
 const char* Vector2Text(Vector2 pos) {
     return TextFormat("x=%f y=%f\r\n", pos.x, pos.y);

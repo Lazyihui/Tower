@@ -1,7 +1,7 @@
 #ifndef CONTEXT_H__
 #define CONTEXT_H__
-#include <stdlib.h>
 #include "../include/raylib.h"
+#include <stdlib.h>
 #include "E_Camera.h"
 #include "E_Mst.h"
 #include "E_Cell.h"
@@ -14,6 +14,9 @@
 typedef struct Ctx {
     E_Camera camera;
     Vector2 targetPos;
+
+
+    
 
     int windowWidth;
     int windowHeight;
@@ -59,11 +62,16 @@ typedef struct Ctx {
     TM_Tower* tower_template;
     int tower_templateCount;
 
+    Texture2D celltex;
+
 } Ctx;
 
-void ContextInit(Ctx* ctx) {
+void Ctx_PreInit(Ctx* ctx) {
 
     CameraEntity_Init(&ctx->camera);
+
+
+
 
     ctx->windowWidth = 800;
     ctx->windowHeight = 400;
@@ -116,7 +124,16 @@ void ContextInit(Ctx* ctx) {
     ctx->bltCount = 0;
     ctx->bltSpawnTimer = 2;
     ctx->bltSpawnInterval = 2;
+    printf("a\r\n");
+
+    printf("g\r\n");
 }
+
+void Ctx_Init(Ctx* ctx) {
+    ctx->celltex = LoadTexture("./assets/cell.png");
+}
+
+
 
 // 找到数组里的某个ID  之前不会写
 int FindIndex_TowerByID(Ctx* ctx, int ID) {
@@ -145,7 +162,7 @@ void ContextFree(Ctx* ctx) {
     for (int i = 0; i < ctx->bltCount; i++) {
         free(ctx->bltarr[i]);
     }
-
+    UnloadTexture(ctx->celltex);
     free(ctx);
 }
 

@@ -11,6 +11,7 @@ typedef struct E_Bullet {
     float radius;
     float speed;
     bool isActive;
+    bool isInside;
 } E_Bullet;
 
 // 向敌人移动
@@ -19,7 +20,6 @@ void E_Bullet_InputByTarget(E_Bullet* blt, Vector2 tarGetPos) {
     blt->moveAxis = Vector2Subtract(tarGetPos, blt->pos);
 
 }
-
 
 
 void E_Bullet_Move(E_Bullet* blt, Vector2 moveAxis, float dt) {

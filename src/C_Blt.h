@@ -16,12 +16,12 @@
 // }
 
 // blt 的位置
-void E_Blt_CellIsClick(Ctx* ctx) {
+void C_Blt_CellIsClick(Ctx* ctx) {
 
     for (int i = 0; i < ctx->cellCount; i++) {
 
         E_Cell* cell = ctx->cellArr[i];
-        cell->isInside = C_Cell_IsMouseInside(cell, ctx->input.mouseWorldPos);
+        cell->isInside = E_Cell_IsMouseInside(cell, ctx->input.mouseWorldPos);
         if (cell->isInside && ctx->input.isMouseDown) {
             for (int j = 0; j < ctx->bltCount; j++) {
                 E_Bullet* blt = ctx->bltarr[j];
@@ -32,25 +32,8 @@ void E_Blt_CellIsClick(Ctx* ctx) {
     }
 }
 
-
-void C_Blt_Tick(Ctx* ctx, float dt) {
-    for (int j = 0; j < ctx->bltCount; j++) {
-        E_Bullet* blt = ctx->bltarr[j];
-        if (blt->isActive) {
-            // blt 找到的range要不一样
-            E_Mst* mst = FindNearestMst(ctx, blt->pos, 150);
-
-            if (mst != NULL) {
-
-                E_Bullet_InputByTarget(blt, mst->pos);
-                E_Bullet_Move(blt, blt->moveAxis, dt);
-            }
-        }
-    }
-}
-
 // 这个放在哪里？
-void E_Blts_Draw(Ctx* ctx) {
+void C_Blts_Draw(Ctx* ctx) {
 
     for (int i = 0; i < ctx->bltCount; i++) {
         E_Bullet* blt = ctx->bltarr[i];
@@ -59,6 +42,23 @@ void E_Blts_Draw(Ctx* ctx) {
             continue;
         }
         E_Bullet_Draw(blt);
+    }
+}
+
+// 总的
+void C_Blt_Tick(Ctx* ctx, float dt) {
+    for (int i = 0; i < ctx->bltCount; i++) {
+        E_Bullet* blt = ctx->bltarr[i];
+        if (blt->isActive) {
+            // blt 找到的range要不一样
+            E_Mst* mst = FindNearestMst(ctx, blt->pos, 150);
+
+            if (mst != NULL) {
+                blt->isInside = IsCirlceInsideCircle(blt->radius, mst->radius, blt->pos, mst->pos);
+                E_Bullet_InputByTarget(blt, mst->pos);
+                E_Bullet_Move(blt, blt->moveAxis, dt);
+            }
+        }
     }
 }
 

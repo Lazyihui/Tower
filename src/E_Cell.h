@@ -10,12 +10,13 @@ typedef struct E_Cell {
     float height;
     Vector2 pos;
     Color color;
+    Texture2D tex;
     bool isInside;
     bool cellToTower;
 } E_Cell;
 
 // tower和鼠标的检测
-bool C_Cell_IsMouseInside(E_Cell* cell, Vector2 mousePos) {
+bool E_Cell_IsMouseInside(E_Cell* cell, Vector2 mousePos) {
     cell->isInside = IsRectInsideMouse(cell->pos, cell->width, cell->height, mousePos);
     // return cell;
     if (cell->isInside) {
@@ -26,8 +27,14 @@ bool C_Cell_IsMouseInside(E_Cell* cell, Vector2 mousePos) {
 }
 
 // 画格子（塔）
-void C_Cell_Draw(E_Cell* cell) {
-    DrawRectangle(cell->pos.x, cell->pos.y, cell->width, cell->width, cell->color);
+void E_Cell_Draw(E_Cell* cell) {
+
+    Rectangle source = {0.0f, 0.0f, (float)cell->tex.width, (float)cell->tex.height};
+    // 开始画的位置
+    int rotation = 0;
+    Rectangle dest = {cell->pos.x, cell->pos.y, cell->width, cell->height};
+    Vector2 pivot = {cell->width / 2, cell->height / 2};
+    DrawTexturePro(cell->tex, source, dest, pivot, rotation, WHITE);
 }
 
 // 没用到目前

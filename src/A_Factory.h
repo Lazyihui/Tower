@@ -11,6 +11,7 @@
 E_Bullet* Factory_CreatBullet(Color color, Vector2 moveAxis, Vector2 pos, float radius, float speed) {
     E_Bullet* blt = (E_Bullet*)malloc(sizeof(E_Bullet));
     blt->color = color;
+    blt->isInside=false;
     blt->isActive = false;
     blt->moveAxis = moveAxis;
     blt->pos = pos;
@@ -62,19 +63,20 @@ E_Mst* Factory_CreateMonsterByTM(Ctx* ctx, int typeID, Vector2 pos) {
 }
 
 // 比较完整
-E_Cell* Factory_CreateCell(Color color, Vector2 pos, Vector2 size, int cellIDRecord) {
-    E_Cell* tower = (E_Cell*)malloc(sizeof(E_Cell));
+E_Cell* Factory_CreateCell(Ctx *ctx,Color color, Vector2 pos, Vector2 size, int cellIDRecord) {
+    E_Cell* cell = (E_Cell*)malloc(sizeof(E_Cell));
 
-    // tower->ID = towerID[count];
-    tower->ID = cellIDRecord;
-    tower->cellToTower = false;
-    tower->isInside = false;
-    tower->color = color;
-    tower->height = size.y;
-    tower->width = size.x;
-    tower->pos.x = pos.x;
-    tower->pos.y = pos.y;
-    return tower;
+    // cell->ID = cellID[count];
+    cell->tex = ctx->celltex;
+    cell->ID = cellIDRecord;
+    cell->cellToTower = false;
+    cell->isInside = false;
+    cell->color = color;
+    cell->height = size.y;
+    cell->width = size.x;
+    cell->pos.x = pos.x;
+    cell->pos.y = pos.y;
+    return cell;
 }
 
 #endif

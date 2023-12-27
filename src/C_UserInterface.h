@@ -31,7 +31,7 @@ void TowerControllerPanel_IsClick(Ctx* ctx) {
 
         E_Cell* cell = ctx->cellArr[i];
 
-        cell->isInside = C_Cell_IsMouseInside(cell, input->mouseWorldPos);
+        cell->isInside = E_Cell_IsMouseInside(cell, input->mouseWorldPos);
 
         if (cell->isInside && input->isMouseDown) {
             // 等于panel->isOpen = true; and panel->isOpen=false; 并起来

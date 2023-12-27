@@ -4,11 +4,11 @@
 #include "A_Ctx.h"
 #include "C_Monster.h"
 #include "C_Cell.h"
-#include "E_UIManifest.h"
 #include "C_UserInterface.h"
 #include "C_Cell.h"
 #include "C_Blt.h"
 #include "C_Tower.h"
+
 
 void B_Game_Init(Ctx* ctx) {
     C_Cell_Init(ctx);
@@ -41,7 +41,7 @@ void B_Game_Tick(Ctx* ctx, float dt) {
 void B_Game_DrawWorld(Ctx* ctx) {
 
     // 路
-    DrawRectangle(-50, -200, 100, 400, BROWN);
+    DrawRectangle(std_cell*-5, std_cell*-20, std_cell*10, std_cell*40, BROWN);
 
     // towerCell
     C_Cell_DrawWorld(ctx);
@@ -54,7 +54,7 @@ void B_Game_DrawWorld(Ctx* ctx) {
         }
     }
     // bullet
-    E_Blts_Draw(ctx);
+    C_Blts_Draw(ctx);
     
 }
 
