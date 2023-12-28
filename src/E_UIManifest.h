@@ -22,8 +22,9 @@ typedef struct UI_PanelEle {
 
 // }
 // element
-UI_PanelEle UI_PanelEle_CraeteTowerType(int index, int typeID, Vector2 pos, Vector2 size,Texture2D red,Texture2D pink,Texture2D purple) {
-    
+UI_PanelEle UI_PanelEle_CraeteTowerType(int index, int typeID, Vector2 pos, Vector2 size, Texture2D red, Texture2D pink,
+                                        Texture2D purple) {
+
     UI_PanelEle ele = (UI_PanelEle){0};
     ele.index = index;
     ele.typeID = typeID;
@@ -85,7 +86,7 @@ void UI_panelEle_Draw(UI_PanelEle* ele) {
     Rectangle source = {0.0f, 0.0f, (float)ele->tex.width, (float)ele->tex.height};
     // 开始画的位置
     int rotation = 0;
-
+    printf("a");
     Rectangle dest = {ele->btn.rect.x, ele->btn.rect.y, ele->btn.rect.width, ele->btn.rect.height};
     Vector2 pivot = {ele->btn.rect.width / 2, ele->btn.rect.height / 2};
     DrawTexturePro(ele->tex, source, dest, pivot, rotation, WHITE);
@@ -102,11 +103,13 @@ typedef struct UI_panel {
     bool isInside;
 } UI_panel;
 
-void UI_Panel_AddElement(UI_panel* panel, Vector2 worldPos, int typeID,Texture2D red,Texture2D pink,Texture2D purple) {
+void UI_Panel_AddElement(UI_panel* panel, Vector2 worldPos, int typeID, Texture2D red, Texture2D pink,
+                         Texture2D purple) {
     panel->startPos = worldPos;
     int count = panel->eleCount;
     Vector2 pos = Vector2Add(worldPos, Vector2_New(0, panel->gapY * count + panel->eleSize * count));
-    UI_PanelEle ele = UI_PanelEle_CraeteTowerType(count, typeID, pos, Vector2_New(panel->eleSize, panel->eleSize),red, pink, purple);
+    UI_PanelEle ele =
+        UI_PanelEle_CraeteTowerType(count, typeID, pos, Vector2_New(panel->eleSize, panel->eleSize), red, pink, purple);
     panel->elements[count] = ele;
     panel->eleCount++;
 }

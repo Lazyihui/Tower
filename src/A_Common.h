@@ -27,6 +27,15 @@ bool IsRectInsideMouse(Vector2 rectPos, int width, int height, Vector2 mousePos)
     }
 }
 
+bool IsRectInsideMousePosCenter(Vector2 rectPos, int width, int height, Vector2 mousePos) {
+    if ((mousePos.x+width/2) >= rectPos.x && (mousePos.x+width/2) <= rectPos.x + width && (mousePos.y+height/2) >= rectPos.y &&
+        (mousePos.y+height/2) <= rectPos.y + height) {
+        return true;
+    } else {
+
+        return false;
+    }
+}
 // 矩形和鼠标的交叉检测
 bool IsRectInsideMouseRec(Rectangle rect, Vector2 mousePos) {
     if (mousePos.x >= rect.x && mousePos.x <= rect.x + rect.width && mousePos.y >= rect.y &&

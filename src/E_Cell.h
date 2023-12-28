@@ -16,8 +16,8 @@ typedef struct E_Cell {
 } E_Cell;
 
 // tower和鼠标的检测
-bool E_Cell_IsMouseInside(E_Cell* cell, Vector2 mousePos) {
-    cell->isInside = IsRectInsideMouse(cell->pos, cell->width, cell->height, mousePos);
+bool E_Cell_IsMouseInside(E_Cell* cell, Vector2 mouseWorldPos) {
+    cell->isInside = IsRectInsideMousePosCenter(cell->pos, cell->width, cell->height, mouseWorldPos);
     // return cell;
     if (cell->isInside) {
         return true;
