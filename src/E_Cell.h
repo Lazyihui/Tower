@@ -32,6 +32,7 @@ void E_Cell_Draw(E_Cell* cell) {
     Rectangle source = {0.0f, 0.0f, (float)cell->tex.width, (float)cell->tex.height};
     // 开始画的位置
     int rotation = 0;
+    
     Rectangle dest = {cell->pos.x, cell->pos.y, cell->width, cell->height};
     Vector2 pivot = {cell->width / 2, cell->height / 2};
     DrawTexturePro(cell->tex, source, dest, pivot, rotation, WHITE);

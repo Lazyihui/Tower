@@ -6,11 +6,8 @@
 void TowerControllerPanel_IsClick(Ctx* ctx);
 void TowerControllerEle_IsClick(Ctx* ctx);
 
-
-
-
 void C_UserInterface_Tick(Ctx* ctx, float dt) {
-    E_Input *input = &ctx->input;
+    E_Input* input = &ctx->input;
     // Tower Click
     UI_panel* panel = &ctx->panel;
     if (panel->isOpen) {
@@ -19,9 +16,6 @@ void C_UserInterface_Tick(Ctx* ctx, float dt) {
     TowerControllerPanel_IsClick(ctx);
     TowerControllerEle_IsClick(ctx);
 }
-
-
-
 
 void TowerControllerPanel_IsClick(Ctx* ctx) {
     E_Input* input = &ctx->input;
@@ -42,7 +36,7 @@ void TowerControllerPanel_IsClick(Ctx* ctx) {
             if (panel->isOpen) {
                 for (int i = 0; i < 3; i++) {
                     int typeID = ctx->typeTower[i];
-                    UI_Panel_AddElement(panel, Vector2_New(cell->pos.x - 20, cell->pos.y), typeID);
+                    UI_Panel_AddElement(panel, Vector2_New(cell->pos.x - gridToXY(1), cell->pos.y), typeID);
                 }
             } else {
                 UI_Panel_Close(panel);
@@ -51,6 +45,10 @@ void TowerControllerPanel_IsClick(Ctx* ctx) {
     }
 }
 
+
+
+
+//改塔
 void TowerControllerEle_IsClick(Ctx* ctx) {
     E_Input* input = &ctx->input;
     UI_panel* panel = &ctx->panel;
@@ -62,13 +60,13 @@ void TowerControllerEle_IsClick(Ctx* ctx) {
             UI_PanelEle* ele = &ctx->panel.elements[i];
 
             ele->isClick = UI_PanelEle_IsMouseInside(ele, input->mouseWorldPos);
-            
+
             if (ele->isClick && input->isMouseDown) {
 
+                // 找到是那一个塔
                 int index = FindIndex_TowerByID(ctx, ctx->cellClickID);
-                
-                cellArr[index]->color = ele->btn.bgColor;
-
+                //要改成图片
+                cellArr[index]->tex = ele->tex;
 
                 UI_Panel_Close(panel);
                 break;

@@ -14,7 +14,6 @@
 #include "B_Login.h"
 #include "B_Game.h"
 #include "C_InfraStructure.h"
-#include "img.h"
 // offset+target
 int main() {
 

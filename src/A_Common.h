@@ -62,6 +62,10 @@ Vector2 gridToPosV(Vector2 cellPos) {
     return Vector2Scale(cellPos, std_cell);
 }
 
+float gridToXY(float x){
+    return x*std_cell;
+}
+
 const char* Vector2Text(Vector2 pos) {
     return TextFormat("x=%f y=%f\r\n", pos.x, pos.y);
 }

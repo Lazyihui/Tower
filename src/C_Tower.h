@@ -20,7 +20,6 @@ void C_Tower_FindNearestMstShoot(Ctx* ctx, float dt) {
         if (cell->isInside && ctx->input.isMouseDown) {
             // 要改 改成tower的攻击范围
 
-            printf("%d", cell->isInside);
             
             // 生成blt 去攻击mst
             cell->cellToTower = true;

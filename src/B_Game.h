@@ -36,6 +36,7 @@ void B_Game_Tick(Ctx* ctx, float dt) {
     C_Tower_FindNearestMstShoot(ctx, dt);
     C_Cell_Tick(ctx,dt);
     C_Blt_Tick(ctx, dt);
+    C_Blt_Fade(ctx);
 }
 
 void B_Game_DrawWorld(Ctx* ctx) {

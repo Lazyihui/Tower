@@ -13,6 +13,7 @@ typedef struct UI_PanelEle {
     float speed;
     float hurt;
     bool isClick;
+    Texture2D tex;
     GUIButton btn;
 } UI_PanelEle;
 
@@ -26,22 +27,30 @@ UI_PanelEle UI_PanelEle_CraeteTowerType(int index, int typeID, Vector2 pos, Vect
     ele.index = index;
     ele.typeID = typeID;
     Color color;
+    Texture2D tex;
     switch (typeID) {
     case 1:
+        tex = LoadTexture("assets/red.png");
+
         color = RED;
         ele.speed = 10;
         ele.hurt = 1;
         break;
     case 2:
+        tex = LoadTexture("assets/pink.png");
+        
         color = PINK;
         ele.hurt = 2;
         ele.speed = 20;
         break;
     case 3:
+        tex = LoadTexture("assets/purple.png");
+        
         color = PURPLE;
         ele.hurt = 3;
         ele.speed = 20;
         break;
+
     default:
         color = BLACK;
         printf("ERR");
@@ -70,7 +79,15 @@ bool UI_PanelEle_IsMouseInside(UI_PanelEle* ele, Vector2 mouseWorldPos) {
 }
 
 void UI_panelEle_Draw(UI_PanelEle* ele) {
+
+    
+    
+  
+  
     DrawRectangle(ele->btn.rect.x, ele->btn.rect.y, ele->btn.rect.width, ele->btn.rect.height, ele->btn.bgColor);
+
+
+
 }
 
 // panel
@@ -99,7 +116,6 @@ int UI_Panel_Click(UI_panel* panel, Vector2 mouseWorldPos, bool isMouseDown) {
         UI_PanelEle* ele = &panel->elements[i];
         // 点到
         if (UI_PanelEle_Click(ele, mouseWorldPos, isMouseDown)) {
-            printf("%d", ele->typeID);
             return ele->typeID; // 返回点击的是哪一个
         }
     }
