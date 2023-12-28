@@ -19,7 +19,7 @@ void C_mst_Tick(Ctx* ctx, float dt) {
         }
         ctx->mstSpawnTimer = ctx->mstSpawnInterval;
     }
-    
+
     for (int i = 0; i < ctx->mstCount; i++) {
         E_Mst* mst = ctx->mstarr[i];
         if (mst->isLive) {
@@ -28,4 +28,20 @@ void C_mst_Tick(Ctx* ctx, float dt) {
     }
 }
 
+void C_mst_IsInside(Ctx* ctx) {
+    for (int i = 0; i < ctx->mstCount; i++) {
+
+        E_Mst* mst = ctx->mstarr[i];
+
+        if (mst->isInside) {
+            mst->hp -= 1;
+        }
+        if (mst->hp <= 0) {
+
+            ctx->mstarr[i] = ctx->mstarr[ctx->mstCount - 1];
+            ctx->mstarr[ctx->mstCount] = mst;
+            ctx->mstCount -= 1;
+        }
+    }
+}
 #endif

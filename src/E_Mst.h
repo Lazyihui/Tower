@@ -21,6 +21,7 @@ typedef struct E_Mst {
 
     Vector2 pos;
     Vector2 moveAxis;
+    bool isInside;
     bool isLive;
 
 } E_Mst;

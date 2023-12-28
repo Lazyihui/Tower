@@ -56,14 +56,14 @@ void C_Blt_Tick(Ctx* ctx, float dt) {
             if (mst != NULL) {
 
                 blt->isInside = IsCirlceInsideCircle(blt->radius, mst->radius, blt->pos, mst->pos);
-
+                mst->isInside=blt->isInside;
                 E_Bullet_InputByTarget(blt, mst->pos);
                 E_Bullet_Move(blt, blt->moveAxis, dt);
             }
         }
     }
 }
-
+//blt消失
 void C_Blt_Fade(Ctx* ctx) {
     for (int i = ctx->bltCount - 1; i >= 0; i--) {
         E_Bullet* blt = ctx->bltarr[i];
