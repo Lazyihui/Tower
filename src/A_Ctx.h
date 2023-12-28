@@ -63,6 +63,9 @@ typedef struct Ctx {
     int tower_templateCount;
 
     Texture2D celltex;
+    Texture2D towerRed;
+    Texture2D towerPink;
+    Texture2D towerPurple;
 
 } Ctx;
 
@@ -131,6 +134,10 @@ void Ctx_PreInit(Ctx* ctx) {
 
 void Ctx_Init(Ctx* ctx) {
     ctx->celltex = LoadTexture("./assets/cell.png");
+    ctx->towerRed = LoadTexture("assets/red.png");
+    ctx->towerPink = LoadTexture("assets/pink.png");
+    ctx->towerPurple = LoadTexture("assets/purple.png");
+    
 }
 
 

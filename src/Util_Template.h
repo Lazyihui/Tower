@@ -7,7 +7,17 @@
 
 TM_Tower* TM_Tower_Find(Ctx* ctx, int typeID) {
     TM_Tower* tm = NULL;
-    for (int i = 0; i < ctx->tower_templateCount; i++);
+    for (int i = 0; i < ctx->tower_templateCount; i++) {
+        TM_Tower* cur = &ctx->tower_template[i];
+        if (cur->typeID == typeID) {
+            tm = cur;
+            break;
+        }
+    }
+    if (tm == NULL) {
+        const char* txt = TextFormat("nofoundtower TM %d", typeID);
+        perror(txt);
+    }
 }
 
 TM_Mst* TM_Mst_Find(Ctx* ctx, int typeID) {

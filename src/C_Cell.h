@@ -29,7 +29,6 @@ void C_Cell_Tick(Ctx* ctx, float dt) {
         if (cell->cellToTower) {
             ctx->bltSpawnTimer -= dt;
             if (ctx->bltSpawnTimer <= 0) {
-                // pos 有问题
                 E_Bullet* blt = Factory_CreatBullet(PINK, Vector2_New(1,0), cell->pos, 5, 30);
                 blt->isActive = true;
                 ctx->bltarr[ctx->bltCount] = blt;

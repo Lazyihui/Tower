@@ -32,7 +32,7 @@ void C_InfraStructure_MstInit(Ctx* ctx) {
     mst_mid.color = GRAY;
     mst_mid.hp = 2;
     template[1] = mst_mid;
-    ctx->mst_templateCount = 2;
+    ctx->mst_templateCount = 1;
     ctx->mst_spawnPos = Vector2_New(0, 210);
     // ==================
 }
