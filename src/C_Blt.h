@@ -23,11 +23,14 @@ void C_Blt_CellIsClick(Ctx* ctx) {
         E_Cell* cell = ctx->cellArr[i];
         cell->isInside = E_Cell_IsMouseInside(cell, ctx->input.mouseWorldPos);
         if (cell->isInside && ctx->input.isMouseDown) {
+            cell->cellToTower = true;
+
             for (int j = 0; j < ctx->bltCount; j++) {
                 E_Bullet* blt = ctx->bltarr[j];
                 // 有问题
                 blt->pos = cell->pos;
             }
+            
         }
     }
 }
@@ -56,14 +59,14 @@ void C_Blt_Tick(Ctx* ctx, float dt) {
             if (mst != NULL) {
 
                 blt->isInside = IsCirlceInsideCircle(blt->radius, mst->radius, blt->pos, mst->pos);
-                mst->isInside=blt->isInside;
+                mst->isInside = blt->isInside;
                 E_Bullet_InputByTarget(blt, mst->pos);
                 E_Bullet_Move(blt, blt->moveAxis, dt);
             }
         }
     }
 }
-//blt消失
+// blt消失
 void C_Blt_Fade(Ctx* ctx) {
     for (int i = ctx->bltCount - 1; i >= 0; i--) {
         E_Bullet* blt = ctx->bltarr[i];

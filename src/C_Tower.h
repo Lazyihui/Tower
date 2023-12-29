@@ -10,23 +10,26 @@
 #include "A_FindUtil.h"
 #include "A_Ctx.h"
 
-void C_Tower_FindNearestMstShoot(Ctx* ctx, float dt) {
-    for (int i = 0; i < ctx->cellCount; i++) {
-        E_Cell* cell = ctx->cellArr[i];
+// void C_Tower_Tick
 
-        cell->isInside = E_Cell_IsMouseInside(cell, ctx->input.mouseWorldPos);
+// (Ctx* ctx, float dt) {
 
-        // 后面一个条件要改 改成点击panel里的某个元素 C_UserInterFace.h
-        if (cell->isInside && ctx->input.isMouseDown) {
-            // 要改 改成tower的攻击范围
+//     for (int i = 0; i < ctx->cellCount; i++) {
+
+//         E_Cell* cell = ctx->cellArr[i];
+
+//         cell->isInside = E_Cell_IsMouseInside(cell, ctx->input.mouseWorldPos);
+
+//         // 后面一个条件要改 改成点击panel里的某个元素 C_UserInterFace.h
+//         if (cell->isInside && ctx->input.isMouseDown) {
+//             // 要改 改成tower的攻击范围
 
             
-            // 生成blt 去攻击mst
-            cell->cellToTower = true;
+//             // 生成blt 去攻击mst
 
             
-        }
-    }
-}
+//         }
+//     }
+// }
 
 #endif

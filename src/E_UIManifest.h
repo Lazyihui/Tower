@@ -65,7 +65,7 @@ UI_PanelEle UI_PanelEle_CraeteTowerType(int index, int typeID, Vector2 pos, Vect
     btn->rect.y = pos.y;
     btn->rect.width = size.x;
     btn->rect.height = size.y;
-
+    ele.tex=tex;
     return ele;
 }
 
@@ -76,7 +76,7 @@ bool UI_PanelEle_Click(UI_PanelEle* ele, Vector2 mousePos, bool isMouseDown) {
 
 bool UI_PanelEle_IsMouseInside(UI_PanelEle* ele, Vector2 mouseWorldPos) {
 
-    ele->isClick = IsRectInsideMouse(Vector2_New(ele->btn.rect.x, ele->btn.rect.y), ele->btn.rect.width,
+    ele->isClick = IsRectInsideMousePosCenter(Vector2_New(ele->btn.rect.x, ele->btn.rect.y), ele->btn.rect.width,
                                      ele->btn.rect.height, mouseWorldPos);
     return ele->isClick;
 }
@@ -86,7 +86,6 @@ void UI_panelEle_Draw(UI_PanelEle* ele) {
     Rectangle source = {0.0f, 0.0f, (float)ele->tex.width, (float)ele->tex.height};
     // 开始画的位置
     int rotation = 0;
-    printf("a");
     Rectangle dest = {ele->btn.rect.x, ele->btn.rect.y, ele->btn.rect.width, ele->btn.rect.height};
     Vector2 pivot = {ele->btn.rect.width / 2, ele->btn.rect.height / 2};
     DrawTexturePro(ele->tex, source, dest, pivot, rotation, WHITE);

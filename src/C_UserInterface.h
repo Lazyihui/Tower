@@ -22,6 +22,7 @@ void TowerControllerPanel_IsClick(Ctx* ctx) {
     E_Input* input = &ctx->input;
     UI_panel* panel = &ctx->panel;
 
+
     for (int i = 0; i < ctx->cellCount; i++) {
 
         E_Cell* cell = ctx->cellArr[i];
@@ -62,6 +63,7 @@ void TowerControllerEle_IsClick(Ctx* ctx) {
 
             if (ele->isClick && input->isMouseDown) {
 
+                
                 // 找到是那一个塔
                 int index = FindIndex_TowerByID(ctx, ctx->cellClickID);
                 // 要改成图片
